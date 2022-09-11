@@ -13,7 +13,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases.
 
 1. Start GIMP and open the preferences dialog via edit/preferences and scroll down to "folders". Expand "folders" and click on "plug-ins". Select the folder which includes your username and copy the path. 
 
-2. Open the file explorer, navigate to this directory and copy the file "gimp-stablediffusion.py" from the repository into this directory.
+2. Open the file explorer, navigate to this directory and copy the file "gimp-stable-diffusion.py" from the repository into this directory.
 
 3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. The menu has one item "Stable img2img". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
 
@@ -38,7 +38,7 @@ Ngrok offers a free service to access an server via a public IP.
 2. Click on the left side menu "Your Authtoken" and copy the token.
 
 #### Colab server
-1. Open the link using the "new tab" option. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stablediffusion/blob/main/gimp-stablediffusion.ipynb)
+1. Open the link using the "new tab" option. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb)
 
 2. Click on "connect" and wait until the status changes to "connected".
 
