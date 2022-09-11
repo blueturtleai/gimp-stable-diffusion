@@ -38,7 +38,7 @@ Ngrok offers a free service to access an server via a public IP.
 2. Click on the left side menu "Your Authtoken" and copy the token.
 
 #### Colab server
-1. Click on ??? to open the notebook.
+1. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stablediffusion/blob/main/gimp-stablediffusion.ipynb)
 
 2. Click on "connect" and wait until the status changes to "connected".
 
