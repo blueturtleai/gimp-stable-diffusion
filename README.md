@@ -13,7 +13,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases.
 
 1. Start GIMP and open the preferences dialog via edit/preferences and scroll down to "folders". Expand "folders" and click on "plug-ins". Select the folder which includes your username and copy the path. 
 
-2. Open the file explorer, navigate to this directory and copy the file "stable.py" from the repository into this directory.
+2. Open the file explorer, navigate to this directory and copy the file "gimp-stablediffusion.py" from the repository into this directory.
 
 3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. The menu has one item "Stable img2img". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
 
