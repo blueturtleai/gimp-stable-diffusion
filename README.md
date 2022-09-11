@@ -1,10 +1,10 @@
 # gimp-stable-diffusion
 
-This repository includes a GIMP plugin for communication with a stablediffusion server and a Google colab notebook for running the server.
+This repository includes a GIMP plugin for communication with a stable-diffusion server and a Google colab notebook for running the server.
 
 ## Overview
 
-The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugin offers the possibility to use img2img. img2img means, that you create an image in GIMP, which is then used as the base for the image creation in stablediffusion.
+The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugin offers the possibility to use img2img. img2img means, that you create an image in GIMP, which is then used as the base for the image creation in stable-diffusion.
 
 ## Installation
 ### GIMP
@@ -17,12 +17,12 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases.
 
 3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. The menu has one item "Stable img2img". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
 
-### Stablediffusion server
+### Stable-Diffusion server
 #### Prerequisits
 You need a Google account, an account on ngrok.com and on huggingface.co. Google is needed for running a colab server, ngrok for exposing an external IP and huggingface for downloading the model file. Details follow below.
 
 #### Model file
-The model file includes all the data which is needed for stablediffusion to generate the images.
+The model file includes all the data which is needed for stable-diffusion to generate the images.
 1. Create an account on https://huggingface.co. 
 
 2. Nagivate here https://huggingface.co/CompVis/stable-diffusion-v-1-4-original and agree to the shown agreement. 
