@@ -1,4 +1,4 @@
-# gimp-stablediffusion
+# gimp-stable-diffusion
 
 This repository includes a GIMP plugin for communication with a stablediffusion server and a Google colab notebook for running the server.
 
