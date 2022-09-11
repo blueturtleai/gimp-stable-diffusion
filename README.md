@@ -1,6 +1,6 @@
 # gimp-stablediffusion
 
-This repository includes a GIMP plugin for communication with a stablediffusion server and a Google colab for the server.
+This repository includes a GIMP plugin for communication with a stablediffusion server and a Google colab notebook for running the server.
 
 ## Overview
 
@@ -42,7 +42,7 @@ Ngrok offers a free service to access an server via a public IP.
 6. Click on the folder symbol on the left. Open the "gdrive/MyDrive" folder and navigate to the model file from huggingface, which you uploaded before. Select the model file, click on the three dots and select "copy path". Close the file explorer via the cross.
 7. Copy the copied path into the input field "checkpoint_model_file" in the "Load Model" section and click on the arrow on the left. Wait until finished.
 8. Click on the arrow left to "Enter ngrok Authtoken". Copy the authtoken into the input field where the cursor blinks and press enter. Wait until finished.
-9. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should something like this:
+9. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
 ```
  * Serving Flask app "__main__" (lazy loading)
  * Environment: production
@@ -52,6 +52,20 @@ Ngrok offers a free service to access an server via a public IP.
 
 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 
- * Running on http://***.ngrok.io
+ * Running on http://*.ngrok.io <- copy this URL
  * Traffic stats available on http://127.0.0.1:4040
  ```
+ 
+ 10. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
+
+## Generate images
+Now we are ready for generationg images.
+
+1. Start GIMP and open an image or create a new one. The image should have the dimensions 512x512. This is a limitation, which will be removed soon.
+2. Select the new AI/Stable im2img menu item. A dialog will open, where you can enter the details for the image generation.
+- Init Strength: How much the AI should take the init image into account. The higher the value, the more will the generated image look like the init image. 0.3 is a good value to use.
+- Prompt Strength: How much the AI should follow the prompt. The higher the value, the more the AI will generate an image which looks like your prompt. 7.5 is a good value to use.
+- Steps: How many steps the AI should use to generate the image. The higher the value, the more the AI will work on details. But it also means, the longer the generation takes and the more the GPU is used. 50 is a good value to use.
+- Prompt: How the generated image should look like.
+- Backend root URL: Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
+3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP.
