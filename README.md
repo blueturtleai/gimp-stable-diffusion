@@ -87,3 +87,12 @@ Now we are ready for generationg images.
    - **Backend root URL:** Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
 
 3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP.
+
+## Hints
+### Colab server
+The ressources on the colab server are limited. So, it's a good idea to stop it when you don't use it. 
+   - If you only don't use it for a short time, just stop the last step (Waiting for GIMP requests). To do so, click on the spinning circle on the left. If you want to use it again, just execute the last step again. The URL for accessing the server will be different, so copy it again.
+
+   - If you don't use if for a longer time, the best is to release all ressources. To do so, select "Runtime/Disconnect and delete runtime". If you want to use it again, you have to start again at step 1.
+
+If you generated several images, the ressources of the colab server will be exhausted at some point. This happens pretty quickly, if you use the free plan. It takes longer for the pro plans. If this happens, an error will occur and you have to wait for some time until you can generate images again.
