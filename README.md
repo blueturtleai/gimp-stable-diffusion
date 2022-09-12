@@ -130,7 +130,7 @@ If this is the case, stop and restart the step again.
 **Will GIMP 3 be supported?** 
 Yes, the plugin will be ported to GIMP 3.
 
-**Does it run locally?** The honest answer is: I don't know. I don't have a local GPU, so I can't try it. But I'm pretty sure there are experts out there who will try it and make a local version available, if it's possible to run it locally.
+**Does it run locally?** The honest answer is: I don't know. I don't have a local GPU, so I can't try it. But I'm pretty sure, there are experts out there who will try it and make a local version available, if it's possible to run it locally.
 
 **Will In-/Out-Painting be supported?** I first need to check the details and see what's possible. So, unfortunately I can't promise it currently.
 
