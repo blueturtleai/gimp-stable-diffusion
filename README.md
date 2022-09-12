@@ -22,7 +22,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases.
 3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. The menu has one item "Stable img2img". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
 
 ### Stable-Diffusion server
-#### Prerequisits
+#### Prerequisites
 You need a Google account, an account on ngrok.com and on huggingface.co. Google is needed for running a colab server, ngrok for exposing an external IP and huggingface for downloading the model file. Details follow below.
 
 #### Model file
