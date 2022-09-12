@@ -71,7 +71,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Running on http://*.ngrok.io <- copy this URL
  * Traffic stats available on http://127.0.0.1:4040
  ```
- Sometimes an error message is displayed intstead. Please check Hints/Colab Server/No external IP for a solution.
+ Sometimes an error message is displayed instead. Please check "Hints/Colab Server/No external IP" below for a solution.
  
  10. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
