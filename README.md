@@ -124,3 +124,13 @@ IndexError: list index out of range
 ```
 
 If this is the case, stop and restart the step again.
+
+## FAQ
+
+**Will GIMP 3 be supported?** 
+Yes, the plugin will be ported to GIMP 3.
+
+**Can the official stable-diffusion API be used?** Unfortunately, this is currently not possible. The reason is, that this API currently can only be accessed via gRPC and it's not possible to use this protocol in a GIMP plugin. As soon as the API is available as a REST API, it will be possible to port the plugin.
+
+**Does it run locally?** The honest answer is: I don't know. I don't have a local GPU, so I can't try it. But I'm pretty sure there are experts out there who will try it and make a local version available, if it's possible to run it locally.
+
