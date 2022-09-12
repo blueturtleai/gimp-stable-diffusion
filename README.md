@@ -136,4 +136,6 @@ Yes, the plugin will be ported to GIMP 3.
 
 **Can the official stable-diffusion API be used?** Unfortunately, this is currently not possible. The reason is, that this API currently can only be accessed via gRPC and it's not possible to use this protocol in a GIMP plugin. As soon as the API is available as a REST API, it will be possible to port the plugin.
 
+**How do I report an error or request a new feature** Please open a new issue in this repository.
+
 
