@@ -38,7 +38,7 @@ Ngrok offers a free service to access an server via a public IP.
 2. Click on the left side menu "Your Authtoken" and copy the token.
 
 #### Colab server
-1. Open the link using the "new tab" option. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb)
+1. Open this link in a new tab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb)
 
 2. Click on "connect" and wait until the status changes to "connected".
 
@@ -67,6 +67,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Running on http://*.ngrok.io <- copy this URL
  * Traffic stats available on http://127.0.0.1:4040
  ```
+ Sometimes an error message is displayed intstead. Please check Hints/Colab Server/No external IP for a solution.
  
  10. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
@@ -90,9 +91,32 @@ Now we are ready for generationg images.
 
 ## Hints
 ### Colab server
+#### Ressource limits
 The ressources on the colab server are limited. So, it's a good idea to stop it when you don't use it. 
    - If you only don't use it for a short time, just stop the last step (Waiting for GIMP requests). To do so, click on the spinning circle on the left. If you want to use it again, just execute the last step again. The URL for accessing the server will be different, so copy it again.
 
    - If you don't use if for a longer time, the best is to release all ressources. To do so, select "Runtime/Disconnect and delete runtime". If you want to use it again, you have to start again at step 1.
 
 If you generated several images, the ressources of the colab server will be exhausted at some point. This happens pretty quickly, if you use the free plan. It takes longer for the pro plans. If this happens, an error will occur and you have to wait for some time until you can generate images again.
+
+#### No external IP
+When you start the last step "Waiting for GIMP requests", sometimes an error message is displayed instead of the URL:
+
+ ```
+ INFO:werkzeug:WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000/
+INFO:werkzeug:Press CTRL+C to quit
+Exception in thread Thread-12:
+Traceback (most recent call last):
+  File "/usr/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.7/threading.py", line 1177, in run
+    self.function(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.7/dist-packages/flask_ngrok.py", line 70, in start_ngrok
+    ngrok_address = _run_ngrok()
+  File "/usr/local/lib/python3.7/dist-packages/flask_ngrok.py", line 38, in _run_ngrok
+    tunnel_url = j['tunnels'][0]['public_url']  # Do the parsing of the get
+IndexError: list index out of range
+```
+
+If this is the case, stop and restart the step again.
