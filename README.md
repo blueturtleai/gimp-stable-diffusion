@@ -78,7 +78,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ## Generate images
 Now we are ready for generationg images.
 
-1. Start GIMP and open an image or create a new one. It is recommended, that the image size is not larger than 512x512 as the model has been trained on this size. If you want to have larger images, use an external resizing tool instead. The generated image will have the dimensions of the init image. But it may be resized to make sure, that the dimensions are a multiple of 64. The larger the image, the longer it takes to generated it and the more GPU ressources are consumed.
+1. Start GIMP and open an image or create a new one. It is recommended, that the image size is not larger than 512x512 as the model has been trained on this size. If you want to have larger images, use an external resizing tool instead. The generated image will have the dimensions of the init image. But it may be resized to make sure, that the dimensions are a multiple of 64. The larger the image, the longer it takes to generate it and the more GPU ressources and RAM is used. IF it is too larger, you will run out of memory.
 
 2. Select the new AI/Stable im2img menu item. A dialog will open, where you can enter the details for the image generation.
    - **Init Strength:** How much the AI should take the init image into account. The higher the value, the more will the generated image look like the init image. 0.3 is a good value to use.
