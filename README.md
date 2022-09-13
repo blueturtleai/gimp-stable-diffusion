@@ -31,7 +31,7 @@ The model file includes all the data which is needed for stable-diffusion to gen
 
 2. Nagivate here https://huggingface.co/CompVis/stable-diffusion-v-1-4-original and agree to the shown agreement. 
 
-3. Download the model file from here: https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt. 
+3. Download the model file from here: https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt (4 GB). 
 
 4. Login into your Google account and upload the file to your Google drive.
 
