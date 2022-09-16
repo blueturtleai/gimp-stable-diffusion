@@ -89,7 +89,7 @@ Now we are ready for generating images.
 
    - **Prompt:** How the generated image should look like.
 
-   - **Seed:** -1 for using a new seed. Otherwise transfer a seed of an already generated image. You find the seed in an additional layer at the top left. If you use a seed, the same image is generated again (same parameters for init strength, steps, etc). A slightly different image will be generated, if the parameters are modified.
+   - **Seed:** -1 for using a new seed. Otherwise transfer a seed of an already generated image. You find the seed in an additional layer at the top left. If you use a seed the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified.
 
    - **Backend root URL:** Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
 
