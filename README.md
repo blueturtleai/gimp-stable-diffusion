@@ -89,9 +89,11 @@ Now we are ready for generating images.
 
    - **Prompt:** How the generated image should look like.
 
+   - **Seed:** -1 for using a new seed. Otherwise transfer a seed of an already generated image. You find the seed in an additional layer at the top left. If you use a seed, the same image is generated again (same parameters for init strength, steps, etc). A slightly different image will be generated, if the parameters are modified.
+
    - **Backend root URL:** Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
 
-3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP.
+3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top lift in an additional layer.
 
 ## Hints
 ### Colab server
