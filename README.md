@@ -76,7 +76,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  10. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
 ## Generate images
-Now we are ready for generationg images.
+Now we are ready for generating images.
 
 1. Start GIMP and open an image or create a new one. It is recommended, that the image size is not larger than 512x512 as the model has been trained on this size. If you want to have larger images, use an external upscaler instead. The generated image will have the dimensions of the init image. But it may be resized to make sure, that the dimensions are a multiple of 64. The larger the image, the longer it takes to generate it and the more GPU ressources and RAM is used. If it is too larger, you will run out of memory.
 
