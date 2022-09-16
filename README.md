@@ -6,6 +6,11 @@ This repository includes a GIMP plugin for communication with a stable-diffusion
 
 The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugin offers the possibility to use img2img. img2img means, that you create an image in GIMP, which is then used as the base for the image creation in stable-diffusion.
 
+
+
+https://user-images.githubusercontent.com/113246030/190710535-9fb23f88-954f-4f73-afea-1475c8690754.MOV
+
+
 ## Installation
 ### Download files
 
