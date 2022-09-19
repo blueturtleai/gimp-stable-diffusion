@@ -1,19 +1,20 @@
 #!/usr/bin/python
 
-# v1.0.1
+# v1.0.2
 
 import urllib2
 import tempfile
 import os
 import base64
 import json
+import re
 
 from gimpfu import *
 
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ENDPOINT = "api/img2img"
-API_VERSION = 2
+API_VERSION = 3
 
 initFile = r"{}".format(os.path.join(tempfile.gettempdir(), INIT_FILE))
 generatedFile = r"{}".format(os.path.join(tempfile.gettempdir(), GENERATED_FILE))
@@ -24,25 +25,38 @@ def getImageData(image, drawable):
    encoded = base64.b64encode(initImage.read())
    return encoded
 
-def displayGenerated(seed):
-   image = pdb.file_png_load(generatedFile, generatedFile)
-   pdb.gimp_display_new(image)
-   # image, drawable, x, y, text, border, antialias, size, size_type, fontname
-   pdb.gimp_text_fontname(image, None, 2, 2, str(seed), -1, TRUE, 12, 1, "Sans")
-   pdb.gimp_image_set_active_layer(image, image.layers[1])
+def displayGenerated(images):
+   color = pdb.gimp_context_get_foreground()
+   pdb.gimp_context_set_foreground((0, 0, 0))
+
+   for image in images:
+      imageFile = open(generatedFile, "wb+")
+      imageFile.write(base64.b64decode(image["image"]))
+      imageFile.close()
+
+      imageLoaded = pdb.file_png_load(generatedFile, generatedFile)
+      pdb.gimp_display_new(imageLoaded)
+      # image, drawable, x, y, text, border, antialias, size, size_type, fontname
+      pdb.gimp_text_fontname(imageLoaded, None, 2, 2, str(image["seed"]), -1, TRUE, 12, 1, "Sans")
+      pdb.gimp_image_set_active_layer(imageLoaded, imageLoaded.layers[1])
+
+   pdb.gimp_context_set_foreground(color)
    return
 
-def img2img(image, drawable, initStrength, promptStrength, steps, prompt, seed, url):
+def img2img(image, drawable, initStrength, promptStrength, steps, seed, imageCount, prompt, url):
    data = {
       "init_strength": float(initStrength),
       "prompt_strength": float(promptStrength),
       "steps": int(steps),
-      "width": image.width,
-      "height": image.height,
+      "width": int(image.width),
+      "height": int(image.height),
       "prompt": prompt,
-      "seed": seed,
+      "image_count": int(imageCount),
       "api_version": API_VERSION
    }
+
+   seed = -1 if not seed else int(seed)
+   data.update({"seed": seed})
 
    imageData = getImageData(image, drawable)
    data.update({"init_img": imageData})
@@ -51,7 +65,10 @@ def img2img(image, drawable, initStrength, promptStrength, steps, prompt, seed, 
    headers = {"Content-Type": "application/json"}
 
    pdb.gimp_progress_set_text("starting dreaming now...")
+
+   url = url + "/" if not re.match(".*/$", url) else url
    url = url + API_ENDPOINT
+
    request = urllib2.Request(url=url, data=data, headers=headers)
 
    try:
@@ -60,14 +77,7 @@ def img2img(image, drawable, initStrength, promptStrength, steps, prompt, seed, 
       data = response.read()
       data = json.loads(data)
 
-      images = data["images"]
-      imageData = base64.b64decode(images[0]["image"])
-
-      imageFile = open(generatedFile, "wb+")
-      imageFile.write(imageData)
-      imageFile.close()
-
-      displayGenerated(images[0]["seed"])
+      displayGenerated(data["images"])
 
       if os.path.exists(initFile):
          os.remove(initFile)
@@ -76,7 +86,7 @@ def img2img(image, drawable, initStrength, promptStrength, steps, prompt, seed, 
          os.remove(generatedFile)
 
    except Exception as ex:
-      if hasattr(ex, "code") and ex.code == 405:
+      if isinstance(ex, urllib2.HTTPError) and ex.code == 405:
          raise Exception("GIMP plugin and stable-diffusion server don't match. Please update the GIMP plugin. If the error still occurs, please reopen the colab notebook.")
       else:
          raise ex
@@ -96,8 +106,9 @@ register(
       (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0.1, 0.9, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
+      (PF_STRING, "seed", "Seed (optional)", ""),
+      (PF_SLIDER, "imageCount", "Number of images", 1, (1, 4,1)),
       (PF_STRING, "prompt", "Prompt", ""),
-      (PF_INT, "seed", "Seed", -1),
       (PF_STRING, "url", "Backend root URL", "")
    ],
    [],
