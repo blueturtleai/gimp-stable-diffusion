@@ -62,7 +62,10 @@ def img2img(image, drawable, initStrength, promptStrength, steps, seed, imageCou
    data.update({"init_img": imageData})
    data = json.dumps(data)
 
-   headers = {"Content-Type": "application/json"}
+   accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+   user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+
+   headers = {'User-Agent': user_agent, 'Accept': accept, 'Content-Type': 'application/json'}
 
    pdb.gimp_progress_set_text("starting dreaming now...")
 
