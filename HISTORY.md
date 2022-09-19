@@ -9,6 +9,16 @@ Initial version
 
 - **Seed**: The seed of the generated image is now displayed in an additional layer. It can be passed to the server to generate the same image again. This only works, if the same parameters (init strength, number of steps, etc) are used.
 
+### 1.0.2
+#### Changes
+- **Image count**: It is now possible to create up to 4 images in one run
+
+- **Seed**: Can now be blank if not used (before -1)
+
+- **Backend URL**: Needs no longer to end with "/"
+
+- **Exception handling**: Has been improved
+
 ## Stable-Diffusion server
 ### 1.0.0
 Initial version
@@ -22,3 +32,7 @@ Initial version
 - **API**: Data is now transferred in JSON. It is checked, if API version of the client and server matches. If mismatch, code 405 is returned.
 
 - **Seed**: If a seed != -1 is transferred to the server, this seed is used for image generation.
+
+### 1.0.3
+#### Changes
+- **Image count**: It is now possible to create up to 4 images in one run
