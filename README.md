@@ -2,6 +2,10 @@
 
 This repository includes a GIMP plugin for communication with a stable-diffusion server and a Google colab notebook for running the server.
 
+Please check HISTORY.md for the latest changes. 
+
+Click here [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb) to open the notebook, if you already read the setup instructions below.
+
 ## Overview
 
 The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugin offers the possibility to use img2img. img2img means, that you create an image in GIMP, which is then used as the base for the image creation in stable-diffusion.
