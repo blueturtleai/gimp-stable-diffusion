@@ -11,6 +11,10 @@ import re
 
 from gimpfu import *
 
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ENDPOINT = "api/img2img"
