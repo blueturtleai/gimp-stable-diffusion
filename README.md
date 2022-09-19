@@ -92,9 +92,11 @@ Now we are ready for generating images.
 
    - **Steps:** How many steps the AI should use to generate the image. The higher the value, the more the AI will work on details. But it also means, the longer the generation takes and the more the GPU is used. 50 is a good value to use.
 
-   - **Prompt:** How the generated image should look like.
+   - **Seed:** This parameter is optional. If it is empty, a random seed will be generated om the server. If you use a seed, the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified. You find the seed in an additional layer at the top left. 
 
-   - **Seed:** -1 for using a new seed. Otherwise transfer a seed of an already generated image. You find the seed in an additional layer at the top left. If you use a seed the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified.
+   - **Number of images:** Amount of images, which are created in one run. The more images you create, the more server ressources will be used and the longer you have to wait until the generated images are diaplayed in GIMP.
+   
+   - **Prompt:** How the generated image should look like.
 
    - **Backend root URL:** Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
 
