@@ -94,7 +94,7 @@ Now we are ready for generating images.
 
    - **Seed:** This parameter is optional. If it is empty, a random seed will be generated om the server. If you use a seed, the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified. You find the seed in an additional layer at the top left. 
 
-   - **Number of images:** Amount of images, which are created in one run. The more images you create, the more server ressources will be used and the longer you have to wait until the generated images are diaplayed in GIMP.
+   - **Number of images:** Number of images, which are created in one run. The more images you create, the more server ressources will be used and the longer you have to wait until the generated images are diaplayed in GIMP.
    
    - **Prompt:** How the generated image should look like.
 
