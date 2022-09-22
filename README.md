@@ -14,6 +14,8 @@ The server exposes a REST API, which is used by the GIMP plugin to communicate w
 
 https://user-images.githubusercontent.com/113246030/190710535-9fb23f88-954f-4f73-afea-1475c8690754.MOV
 
+## Manual
+It doesn't exist a separate manual. Please check the following sections for installation and image generation for a detailled explanation.
 
 ## Installation
 ### Download files
