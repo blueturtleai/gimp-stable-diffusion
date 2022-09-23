@@ -96,6 +96,13 @@ Now we are ready for generating images.
 1. Start GIMP and open an image or create a new one. It is recommended, that the image size is not larger than 512x512 as the model has been trained on this size. If you want to have larger images, use an external upscaler instead. The generated image will have the dimensions of the init image. But it may be resized to make sure, that the dimensions are a multiple of 64. The larger the image, the longer it takes to generate it and the more GPU ressources and RAM is used. If it is too larger, you will run out of memory.
 
 2. Select the new AI/Stable im2img menu item. A dialog will open, where you can enter the details for the image generation.
+
+   - **Inpainting:** If you want to inpaint. Please read the section "Inpainting" below for an explanation how inpainting works.
+   
+   - **Inpainting/Mask Brightness:** For future use. For now leave the value just unchanged.
+   
+   - **Inpainting/Mask Contrast:** For future use. For now leave the value just unchanged.
+    
    - **Init Strength:** How much the AI should take the init image into account. The higher the value, the more will the generated image look like the init image. 0.3 is a good value to use.
 
    - **Prompt Strength:** How much the AI should follow the prompt. The higher the value, the more the AI will generate an image which looks like your prompt. 7.5 is a good value to use.
@@ -111,6 +118,13 @@ Now we are ready for generating images.
    - **Backend root URL:** Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
 
 3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top lift in an additional layer.
+
+### Inpainting
+Inpainting is replacing a part of an existing image. For example you don't like the face on an image, you can replace it. Inpainting is currently still in experimental stage. So, please don't expect perfect results. The experimental stage is caused by the server side and not by GIMP.
+
+For inpainting it's necessary to prepare the input image because the AI needs to know which part you want to replace. For this purpose you replace this image part by transparency. To do so, open the init image in GIMP and select "Layer/Transparency/Add alpha channel". Select now the part of the image which should be replaced and delete it. You can also use the eraser tool. 
+
+For the prompt you use now a description of the new image. For example the image shows currently "a little girl running over a meadow with a balloon" and you want to replace the balloon by a parachute. You just write now "a little girl running over a meadow with a parachute".
 
 ## Hints
 ### Colab server
