@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.1.0
+#### Changes
+- Inpainting is now supported
+
 ### 1.0.2
 #### Changes
 - **Image count**: It is now possible to create up to 4 images in one run
@@ -20,6 +24,15 @@
 Initial version
 
 ## Stable-Diffusion server
+### 1.1.1
+#### Changes
+- Mounting Google drive and setting model path are now two separated steps
+
+### 1.1.0
+#### Changes
+- The notebook is now based on the deforum notebook (before pharmapsychotic)
+- Inpainting is now supported
+
 ### 1.0.3
 #### Changes
 - **Image count**: It is now possible to create up to 4 images in one run
