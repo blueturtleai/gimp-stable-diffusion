@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.0.3
+# v1.1.0
 
 import urllib2
 import tempfile
@@ -18,7 +18,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ENDPOINT = "api/img2img"
-API_VERSION = 3
+API_VERSION = 4
 
 initFile = r"{}".format(os.path.join(tempfile.gettempdir(), INIT_FILE))
 generatedFile = r"{}".format(os.path.join(tempfile.gettempdir(), GENERATED_FILE))
@@ -47,8 +47,11 @@ def displayGenerated(images):
    pdb.gimp_context_set_foreground(color)
    return
 
-def img2img(image, drawable, initStrength, promptStrength, steps, seed, imageCount, prompt, url):
+def img2img(image, drawable, isInpainting, maskBrightness, maskContrast, initStrength, promptStrength, steps, seed, imageCount, prompt, url):
    data = {
+      "inpainting": bool(isInpainting),
+      "mask_brightness": float(maskBrightness),
+      "mask_contrast": float(maskContrast),
       "init_strength": float(initStrength),
       "prompt_strength": float(promptStrength),
       "steps": int(steps),
@@ -71,12 +74,11 @@ def img2img(image, drawable, initStrength, promptStrength, steps, seed, imageCou
 
    headers = {'User-Agent': user_agent, 'Accept': accept, 'Content-Type': 'application/json'}
 
-   pdb.gimp_progress_set_text("starting dreaming now...")
-
    url = url + "/" if not re.match(".*/$", url) else url
    url = url + API_ENDPOINT
 
    request = urllib2.Request(url=url, data=data, headers=headers)
+   pdb.gimp_progress_set_text("starting dreaming now...")
 
    try:
       response = urllib2.urlopen(request)
@@ -110,7 +112,10 @@ register(
    "<Image>/AI/Stable img2img",
    "*",
    [
-      (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0.1, 0.9, 0.1)),
+      (PF_TOGGLE, "isInpainting", "Inpainting", False),
+      (PF_SLIDER, "maskBrightness", "Inpainting\nMask Brightness", 1.0, (0.0, 1.0, 0.1)),
+      (PF_SLIDER, "maskContrast", "Inpainting\nMask Contrast", 1.0, (0.0, 1.0, 0.1)),
+      (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0.0, 1.0, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
       (PF_STRING, "seed", "Seed (optional)", ""),
