@@ -57,19 +57,23 @@ Ngrok offers a free service to access an server via a public IP.
 
 2. Click on "connect" and wait until the status changes to "connected".
 
-3. Click on the arrow left to "Check CPU" and wait until you see a checkmark on the left.
+3. Click on the arrow left to "NVIDIA GPU" and wait until you see a checkmark on the left.
 
-4. Click on the arrow left to "Mount Google drive". Confirm the mount in the dialog which pops up. When the checkmark is shown proceed.
+4. Click on the arrow left to "Mount Google Drive" and confirm the mount. Wait until you see a checkmark on the left.
 
-5. Click on the arrow left to "Installation" and wait until finished.
+5. Click on the folder symbol on the left. Open the "gdrive/MyDrive" folder and navigate to the model file from huggingface, which you uploaded before. Select the model file, click on the three dots and select "copy path". Close the file explorer via the cross.
 
-6. Click on the folder symbol on the left. Open the "gdrive/MyDrive" folder and navigate to the model file from huggingface, which you uploaded before. Select the model file, click on the three dots and select "copy path". Close the file explorer via the cross.
+5. Insert the copied path into the field "models_path_gdrive" at the step "Set Model Path". Remove the filename and the last "/" at the end. The path should now look for example like this ```/content/drive/MyDrive/SD/models```. Click on the arrow at the left and wait until finished.
 
-7. Copy the copied path into the input field "checkpoint_model_file" in the "Load Model" section and click on the arrow on the left. Wait until finished.
+6. Execute the step "Setup Environment".
 
-8. Click on the arrow left to "Enter ngrok Authtoken". Copy the authtoken into the input field where the cursor blinks and press enter. Wait until finished.
+7. Execute the step "Python Definitions".
 
-9. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
+8. Execute the step "Select and Load Model". In the selector for the model files there is currently only one entry. When v1.5 has been released, this model will be added to the selector.
+
+9. Click on the arrow left to "Enter ngrok Authtoken". Copy the authtoken into the input field where the cursor blinks and press enter. Wait until finished.
+
+10. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
 ```
  * Serving Flask app "__main__" (lazy loading)
  * Environment: production
