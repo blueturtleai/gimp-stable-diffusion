@@ -34,7 +34,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excl
 
 ### Stable-Diffusion server
 #### Prerequisites
-You need a Google account, an account on ngrok.com and on huggingface.co. Google is needed for running a colab server, ngrok for exposing an external IP and huggingface for downloading the model file. Details follow below.
+You need a Google account, an account on ngrok.com (signup with Google/Github account possible) and on huggingface.co. Google is needed for running a colab server, ngrok for exposing an external IP and huggingface for downloading the model file. Details follow below.
 
 #### Model file
 The model file includes all the data which is needed for stable-diffusion to generate the images.
