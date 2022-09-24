@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.1.0
+# v1.1.1
 
 import urllib2
 import tempfile
@@ -8,6 +8,7 @@ import os
 import base64
 import json
 import re
+import ssl
 
 from gimpfu import *
 
@@ -15,6 +16,12 @@ INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ENDPOINT = "api/img2img"
 API_VERSION = 4
+
+HEADER_ACCEPT = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+HEADER_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
+
+headers = {"Accept": HEADER_ACCEPT, "User-Agent": HEADER_USER_AGENT, "Content-Type": "application/json"}
+ssl._create_default_https_context = ssl._create_unverified_context
 
 initFile = r"{}".format(os.path.join(tempfile.gettempdir(), INIT_FILE))
 generatedFile = r"{}".format(os.path.join(tempfile.gettempdir(), GENERATED_FILE))
@@ -65,9 +72,8 @@ def img2img(image, drawable, isInpainting, maskBrightness, maskContrast, initStr
    data.update({"init_img": imageData})
    data = json.dumps(data)
 
-   headers = {"Content-Type": "application/json"}
-
    url = url + "/" if not re.match(".*/$", url) else url
+   url = re.sub("http://", "https://", url)
    url = url + API_ENDPOINT
 
    request = urllib2.Request(url=url, data=data, headers=headers)
