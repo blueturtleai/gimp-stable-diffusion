@@ -8,7 +8,7 @@ Click here [![Open In Colab](https://colab.research.google.com/assets/colab-badg
 
 ## Overview
 
-The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugin offers the possibility to use img2img. img2img means, that you create an image in GIMP, which is then used as the base for the image creation in stable-diffusion.
+The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugin offers the possibility to use img2img. img2img means, that you create an image in GIMP, which is then used as the base for the image creation in stable-diffusion. It also supports inpainting for the case you want to change parts of an existing image.
 
 
 
