@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.1.1
+#### Changes
+- Data is now transferred to the server using https
+
 ### 1.1.0
 #### Changes
 - Inpainting is now supported
