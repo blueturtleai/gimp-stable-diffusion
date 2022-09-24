@@ -48,7 +48,7 @@ The model file includes all the data which is needed for stable-diffusion to gen
 
 #### Ngrok Authtoken
 Ngrok offers a free service to access an server via a public IP.
-1. Create an account on https://ngrok.com
+1. Create an account on https://ngrok.com. Use Signup with Google or Github if you like.
 
 2. Click on the left side menu "Your Authtoken" and copy the token.
 
