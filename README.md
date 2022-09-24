@@ -61,7 +61,7 @@ Ngrok offers a free service to access an server via a public IP.
 
 4. Click on the arrow left to "Mount Google Drive" and confirm the mount. Wait until you see a checkmark on the left.
 
-5. Click on the folder symbol on the left. Open the "gdrive/MyDrive" folder and navigate to the model file from huggingface, which you uploaded before. Select the model file, click on the three dots and select "copy path". Close the file explorer via the cross.
+5. Click on the folder symbol on the left. Open the "drive/MyDrive" folder and navigate to the model file from huggingface, which you uploaded before. Select the model file, click on the three dots and select "copy path". Close the file explorer via the cross.
 
 5. Insert the copied path into the field "models_path_gdrive" at the step "Set Model Path". Remove the filename and the last "/" at the end. The path should now look for example like this ```/content/drive/MyDrive/SD/models```. Click on the arrow at the left and wait until finished.
 
@@ -88,7 +88,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  ```
  Sometimes an error message is displayed instead. Please check "Hints/Colab Server/No external IP" below for a solution.
  
- 10. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
+ 11. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
 ## Generate images
 Now we are ready for generating images.
