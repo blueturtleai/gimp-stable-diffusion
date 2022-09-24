@@ -88,7 +88,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  ```
  Sometimes an error message is displayed instead. Please check "Hints/Colab Server/No external IP" below for a solution.
  
- 11. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
+11. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
 ## Generate images
 Now we are ready for generating images.
