@@ -117,7 +117,7 @@ Now we are ready for generating images.
 
    - **Backend root URL:** Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
 
-3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top lift in an additional layer.
+3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
 
 ### Inpainting
 Inpainting is replacing a part of an existing image. For example you don't like the face on an image, you can replace it. Inpainting is currently still in experimental stage. So, please don't expect perfect results. The experimental stage is caused by the server side and not by GIMP.
