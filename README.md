@@ -15,7 +15,7 @@ The server exposes a REST API, which is used by the GIMP plugin to communicate w
 https://user-images.githubusercontent.com/113246030/190710535-9fb23f88-954f-4f73-afea-1475c8690754.MOV
 
 ## Manual
-It doesn't exist a separate manual. Please check the following sections for installation and image generation for a detailled explanation.
+It doesn't exist a separate manual. Please check the following sections for installation and image generation for a detailed explanation.
 
 ## Installation
 ### Download files
@@ -47,8 +47,8 @@ The model file includes all the data which is needed for stable-diffusion to gen
 4. Login into your Google account and upload the file to your Google drive.
 
 #### Ngrok Authtoken
-Ngrok offers a free service to access an server via a public IP.
-1. Create an account on https://ngrok.com. Use Signup with Google or Github if you like.
+Ngrok offers a free service to access a server via a public IP.
+1. Create an account on https://ngrok.com. It's possible to signup with Google or Github.
 
 2. Click on the left side menu "Your Authtoken" and copy the token.
 
@@ -63,17 +63,17 @@ Ngrok offers a free service to access an server via a public IP.
 
 5. Click on the folder symbol on the left. Open the "drive/MyDrive" folder and navigate to the model file from huggingface, which you uploaded before. Select the model file, click on the three dots and select "copy path". Close the file explorer via the cross.
 
-5. Insert the copied path into the field "models_path_gdrive" at the step "Set Model Path". Remove the filename and the last "/" at the end. The path should now look for example like this ```/content/drive/MyDrive/SD/models```. Click on the arrow at the left and wait until finished.
+6. Insert the copied path into the field "models_path_gdrive" at the step "Set Model Path". Remove the filename and the last "/" at the end. The path should now look for example like this ```/content/drive/MyDrive/SD/models```. Click on the arrow at the left and wait until finished.
 
-6. Execute the step "Setup Environment".
+7. Execute the step "Setup Environment".
 
-7. Execute the step "Python Definitions".
+8. Execute the step "Python Definitions".
 
-8. Execute the step "Select and Load Model". In the selector for the model files there is currently only one entry. When v1.5 has been released, this model will be added to the selector.
+9. Execute the step "Select and Load Model". In the selector for the model files there is currently only one entry. When v1.5 has been released, this model will be added to the selector.
 
-9. Click on the arrow left to "Enter ngrok Authtoken". Copy the authtoken into the input field where the cursor blinks and press enter. Wait until finished.
+10. Click on the arrow left to "Enter ngrok Authtoken". Copy the authtoken into the input field where the cursor blinks and press enter. Wait until finished.
 
-10. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
+11. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
 ```
  * Serving Flask app "__main__" (lazy loading)
  * Environment: production
@@ -88,7 +88,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  ```
  Sometimes an error message is displayed instead. Please check "Hints/Colab Server/No external IP" below for a solution.
  
-11. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
+12. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
 ## Generate images
 Now we are ready for generating images.
@@ -109,18 +109,18 @@ Now we are ready for generating images.
 
    - **Steps:** How many steps the AI should use to generate the image. The higher the value, the more the AI will work on details. But it also means, the longer the generation takes and the more the GPU is used. 50 is a good value to use.
 
-   - **Seed:** This parameter is optional. If it is empty, a random seed will be generated om the server. If you use a seed, the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified. You find the seed in an additional layer at the top left. 
+   - **Seed:** This parameter is optional. If it is empty, a random seed will be generated on the server. If you use a seed, the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified. You find the seed in an additional layer at the top left. 
 
-   - **Number of images:** Number of images, which are created in one run. The more images you create, the more server ressources will be used and the longer you have to wait until the generated images are diaplayed in GIMP.
+   - **Number of images:** Number of images, which are created in one run. The more images you create, the more server ressources will be used and the longer you have to wait until the generated images are displayed in GIMP.
    
    - **Prompt:** How the generated image should look like.
 
-   - **Backend root URL:** Insert the ngrok.io URL you copied from the server. It has to end by an "/". The URL should look like this ```http://*.ngrok.io/```
+   - **Backend root URL:** Insert the ngrok.io URL you copied from the server. The URL should look like this ```http://*.ngrok.io```.
 
 3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
 
 ### Inpainting
-Inpainting is replacing a part of an existing image. For example you don't like the face on an image, you can replace it. Inpainting is currently still in experimental stage. So, please don't expect perfect results. The experimental stage is caused by the server side and not by GIMP.
+Inpainting means replacing a part of an existing image. For example if you don't like the face on an image, you can replace it. **Inpainting is currently still in experimental stage. So, please don't expect perfect results.** The experimental stage is caused by the server side and not by GIMP.
 
 For inpainting it's necessary to prepare the input image because the AI needs to know which part you want to replace. For this purpose you replace this image part by transparency. To do so, open the init image in GIMP and select "Layer/Transparency/Add alpha channel". Select now the part of the image which should be replaced and delete it. You can also use the eraser tool. 
 
@@ -165,7 +165,7 @@ Yes, the plugin will be ported to GIMP 3.
 
 **Does it run locally?** According to Google it should be possible to run the notebook locally. As I don't have a local GPU, I can't try it myself. IF you give it a try, I would be happy to know, if it really works.
 
-**Will In-/Out-Painting be supported?** I first need to check the details and see what's possible. So, unfortunately I can't promise it currently.
+**Will Out-Painting be supported?** I first need to check the details and see what's possible. So, unfortunately I can't promise it currently.
 
 **Can the official stable-diffusion API be used?** Unfortunately, this is currently not possible. The reason is, that this API currently can only be accessed via gRPC and it's not possible to use this protocol in a GIMP plugin. As soon as the API is available as a REST API, it will be possible to port the plugin.
 
