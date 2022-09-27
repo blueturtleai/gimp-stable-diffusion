@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.1.1
+# v1.1.2
 
 import urllib2
 import tempfile
@@ -81,17 +81,19 @@ def img2img(image, drawable, isInpainting, maskBrightness, maskContrast, initStr
 
    try:
       response = urllib2.urlopen(request)
-
       data = response.read()
-      data = json.loads(data)
 
-      displayGenerated(data["images"])
+      try:
+         data = json.loads(data)
+         displayGenerated(data["images"])
 
-      if os.path.exists(initFile):
-         os.remove(initFile)
+         if os.path.exists(initFile):
+            os.remove(initFile)
 
-      if os.path.exists(generatedFile):
-         os.remove(generatedFile)
+         if os.path.exists(generatedFile):
+            os.remove(generatedFile)
+      except Exception as ex:
+         raise Exception(data)
 
    except Exception as ex:
       if isinstance(ex, urllib2.HTTPError) and ex.code == 405:
