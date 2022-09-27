@@ -34,7 +34,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excl
 
 ### Stable-Diffusion server
 #### Prerequisites
-You need a Google account, an account on ngrok.com (signup with Google/Github account possible) and on huggingface.co. Google is needed for running a colab server, ngrok for exposing an external IP and huggingface for downloading the model file. Details follow below.
+You need a Google account and on huggingface.co. Google is needed for running a colab server and huggingface for downloading the model file. Details follow below.
 
 #### Model file
 The model file includes all the data which is needed for stable-diffusion to generate the images.
@@ -45,12 +45,6 @@ The model file includes all the data which is needed for stable-diffusion to gen
 3. Download the model file from here: https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt (4 GB). 
 
 4. Login into your Google account and upload the file to your Google drive.
-
-#### Ngrok Authtoken
-Ngrok offers a free service to access a server via a public IP.
-1. Create an account on https://ngrok.com. It's possible to signup with Google or Github.
-
-2. Click on the left side menu "Your Authtoken" and copy the token.
 
 #### Colab server
 1. Open this link in a new tab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb)
@@ -83,10 +77,9 @@ Ngrok offers a free service to access a server via a public IP.
 
 INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 
- * Running on http://*.ngrok.io <- copy this URL
+ * Running on https://*.trycloudflare.com <- copy this URL
  * Traffic stats available on http://127.0.0.1:4040
  ```
- Sometimes an error message is displayed instead. Please check "Hints/Colab Server/No external IP" below for a solution.
  
 12. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
@@ -135,28 +128,6 @@ The ressources on the colab server are limited. So, it's a good idea to stop it 
    - If you don't use if for a longer time, the best is to release all ressources. To do so, select "Runtime/Disconnect and delete runtime". If you want to use it again, you have to start again at step 1.
 
 If you generated several images, the ressources of the colab server will be exhausted at some point. This happens pretty quickly, if you use the free plan. It takes longer for the pro plans. If this happens, an error will occur and you have to wait for some time until you can generate images again.
-
-#### No external IP
-When you start the last step "Waiting for GIMP requests", sometimes an error message is displayed instead of the URL:
-
- ```
- INFO:werkzeug:WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
- * Running on http://127.0.0.1:5000/
-INFO:werkzeug:Press CTRL+C to quit
-Exception in thread Thread-12:
-Traceback (most recent call last):
-  File "/usr/lib/python3.7/threading.py", line 926, in _bootstrap_inner
-    self.run()
-  File "/usr/lib/python3.7/threading.py", line 1177, in run
-    self.function(*self.args, **self.kwargs)
-  File "/usr/local/lib/python3.7/dist-packages/flask_ngrok.py", line 70, in start_ngrok
-    ngrok_address = _run_ngrok()
-  File "/usr/local/lib/python3.7/dist-packages/flask_ngrok.py", line 38, in _run_ngrok
-    tunnel_url = j['tunnels'][0]['public_url']  # Do the parsing of the get
-IndexError: list index out of range
-```
-
-If this is the case, stop and restart the step again.
 
 ## FAQ
 
