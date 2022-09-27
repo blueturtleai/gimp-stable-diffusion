@@ -65,9 +65,7 @@ The model file includes all the data which is needed for stable-diffusion to gen
 
 9. Execute the step "Select and Load Model". In the selector for the model files there is currently only one entry. When v1.5 has been released, this model will be added to the selector.
 
-10. Click on the arrow left to "Enter ngrok Authtoken". Copy the authtoken into the input field where the cursor blinks and press enter. Wait until finished.
-
-11. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
+10. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
 ```
  * Serving Flask app "__main__" (lazy loading)
  * Environment: production
@@ -81,7 +79,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Traffic stats available on http://127.0.0.1:4040
  ```
  
-12. Copy the URL from above, which reads like ```http://*.ngrok.io```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
+12. Copy the URL from above, which reads like ```https://*.trycloudflare.com```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
 ## Generate images
 Now we are ready for generating images.
@@ -108,7 +106,7 @@ Now we are ready for generating images.
    
    - **Prompt:** How the generated image should look like.
 
-   - **Backend root URL:** Insert the ngrok.io URL you copied from the server. The URL should look like this ```http://*.ngrok.io```.
+   - **Backend root URL:** Insert the trycloudflare.com URL you copied from the server. The URL should look like this ```https://*.trycloudflare.com```.
 
 3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
 
