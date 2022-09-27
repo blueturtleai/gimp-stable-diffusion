@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.1.2
+#### Changes
+- Exception handling further improved
+
 ### 1.1.1
 #### Changes
 - Data is now transferred to the server using https
@@ -28,6 +32,10 @@
 Initial version
 
 ## Stable-Diffusion server
+### 1.1.2
+#### Changes
+- Instead of ngrok now cloudflare is used as the tunnel provider. The switch is done because several users reported problems. Additional benefit is, that it's no longer necessary to register on ngrok and enter the authkey. Thanks for suggesting this @opencoca.
+
 ### 1.1.1
 #### Changes
 - Mounting Google drive and setting model path are now two separated steps
