@@ -44,7 +44,7 @@ The model file includes all the data which is needed for stable-diffusion to gen
 
 3. Download the model file from here: https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt (4 GB). 
 
-4. Login into your Google account and upload the file to your Google drive. Please use the original filename.
+4. Login into your Google account and upload the file to your Google drive. Please use the original filename (sd-v1-4.ckpt).
 
 #### Colab server
 1. Open this link in a new tab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb)
