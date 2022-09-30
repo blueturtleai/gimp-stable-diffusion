@@ -143,7 +143,7 @@ If you generated several images, the ressources of the colab server will be exha
 **Will GIMP 3 be supported?** 
 Yes, the plugin will be ported to GIMP 3.
 
-**Does it run locally?** According to Google it should be possible to run the notebook locally. As I don't have a local GPU, I can't try it myself. IF you give it a try, I would be happy to know, if it really works.
+**Does it run locally?** According to Google it should be possible to run the notebook locally. As I don't have a local GPU, I can't try it myself. If you give it a try, I would be happy to know, if it really works.
 
 **Will Out-Painting be supported?** I first need to check the details and see what's possible. So, unfortunately I can't promise it currently.
 
