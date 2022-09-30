@@ -119,7 +119,15 @@ For the prompt you use now a description of the new image. For example the image
 
 ## Troubleshooting
 ### GIMP
-#### Linux
+#### AI menu is not shown
+##### macOS/Linux
+   - Open a terminal an try to run the plugin py file manually via ```python <path-to-plugin-folder>/gimp-stable-diffusion.py```. You should see the error message, that "gimpfu" is unknown. Make sure, that you are running Python 2, as this version is used by GIMP. If the command "python" is unknown, please install Python 2 manually. If the AI menu is still not shown, please reinstall GIMP.
+
+##### macOS
+   - Please double check, if the permissions of the plugin py file are set to 755. It seems, that changing permissions doesn't work via the file manager. Please open a terminal, cd to the plugins directory and run "chmod ugo+x *py".
+   
+#### Error gimp_wire_read
+##### Linux
    - If you get this error ```gimp: LibGimpBase-WARNING: gimp: gimp_wire_read(): error```, it's very likely, that you have a GIMP version installed, which doesn't include Python. Check, if you have got the menu "Filters > Python-Fu > Console". If it is missing, please install GIMP from here: https://flathub.org/apps/details/org.gimp.GIMP.
 
 ### Colab server
