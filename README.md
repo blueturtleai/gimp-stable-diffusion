@@ -30,7 +30,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excl
 
 2. Open the file explorer, navigate to this directory and copy the file "gimp-stable-diffusion.py" from the repository into this directory. If you are on MacOS or Linux, change the file permissions to 755.
 
-3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. Please check in this case "Hints/GIMP" for possible solutions. The menu has one item "Stable img2img". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
+3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. Please check in this case "Troubleshooting/GIMP" for possible solutions. The menu has one item "Stable img2img". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
 
 ### Stable-Diffusion server
 #### Prerequisites
@@ -117,7 +117,7 @@ For inpainting it's necessary to prepare the input image because the AI needs to
 
 For the prompt you use now a description of the new image. For example the image shows currently "a little girl running over a meadow with a balloon" and you want to replace the balloon by a parachute. You just write now "a little girl running over a meadow with a parachute".
 
-## Hints
+## Troubleshooting
 ### GIMP
 #### Linux
    - If you get this error ```gimp: LibGimpBase-WARNING: gimp: gimp_wire_read(): error```, it's very likely, that you have a GIMP version installed, which doesn't include Python. Check, if you have got the menu "Filters > Python-Fu > Console". If it is missing, please install GIMP from here: https://flathub.org/apps/details/org.gimp.GIMP.
