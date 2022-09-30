@@ -121,7 +121,7 @@ For the prompt you use now a description of the new image. For example the image
 ### GIMP
 #### AI menu is not shown
 ##### macOS/Linux
-   - Open a terminal an try to run the plugin py file manually via ```python <path-to-plugin-folder>/gimp-stable-diffusion.py```. You should see the error message, that "gimpfu" is unknown. Make sure, that you are running Python 2, as this version is used by GIMP. If the command "python" is unknown, please install Python 2 manually. If the AI menu is still not shown, please reinstall GIMP.
+   - Open a terminal an try to run the plugin py file manually via ```python <path-to-plugin-folder>/gimp-stable-diffusion.py```. You should see the error message, that "gimpfu" is unknown. Make sure, that you are running Python 2, as this version is used by GIMP. If other errors occur, please reinstall GIMP.
 
 ##### macOS
    - Please double check, if the permissions of the plugin py file are set to 755. It seems, that changing permissions doesn't work via the file manager. Please open a terminal, cd to the plugins directory and run "chmod ugo+x *py".
