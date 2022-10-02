@@ -32,6 +32,10 @@
 Initial version
 
 ## Stable-Diffusion server
+### 1.2.0
+#### Changes
+- It's no longer necessary to upload model files yourself to your Google drive. If a model file is missing, it is automatically downloaded from Huggingface. A Huggingface account and acceptance of the terms of service is still needed.
+
 ### 1.1.2
 #### Changes
 - Instead of ngrok now cloudflare is used as the tunnel provider. The switch is done because several users reported problems. Additional benefit is, that it's no longer necessary to register on ngrok and enter the authkey. Thanks for suggesting this @opencoca.
