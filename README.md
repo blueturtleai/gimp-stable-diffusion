@@ -55,7 +55,7 @@ The model file includes all the data which is needed for stable-diffusion to gen
 
 4. Click on the arrow left to "Mount Google Drive" and confirm the mount. Wait until you see a checkmark on the left.
 
-5. Set the model path. It is recommended to use the default path. That way you don't have to adjust the path manually every time. If the model file doesn't exist at this location, it is automatically downloaded from Huggingface. Please make sure you have enough free space on your drive (about 4 GB). If you choose an individual path, please read the hints in the notebook.
+5. Set the model path. It is recommended to use the default path. That way you don't have to adjust the path manually every time. If the model file doesn't exist at this location, it is automatically downloaded from Huggingface. Please make sure you have enough free space on your drive (about 4 GB). If you choose an individual path, please read the hints in the notebook. Execute the step.
 
 6. Execute the step "Setup Environment".
 
