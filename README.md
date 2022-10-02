@@ -42,9 +42,9 @@ The model file includes all the data which is needed for stable-diffusion to gen
 
 2. Nagivate here https://huggingface.co/CompVis/stable-diffusion-v-1-4-original and agree to the shown agreement. 
 
-3. Download the model file from here: https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt (4 GB). 
+3. Go to "Settings/Access Tokens" on the left side.
 
-4. Login into your Google account and upload the file to your Google drive. Please use the original filename (sd-v1-4.ckpt).
+4. Click on "New Token", enter a name, select "Read" as role, click on create and copy the token.
 
 #### Colab server
 1. Open this link in a new tab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb)
@@ -55,17 +55,15 @@ The model file includes all the data which is needed for stable-diffusion to gen
 
 4. Click on the arrow left to "Mount Google Drive" and confirm the mount. Wait until you see a checkmark on the left.
 
-5. Click on the folder symbol on the left. Open the "drive/MyDrive" folder and navigate to the model file from huggingface, which you uploaded before. Select the model file, click on the three dots and select "copy path". Close the file explorer via the cross.
+5. Set the model path. It is recommended to use the default path. That way you don't have to adjust the path manually every time. If the model file doesn't exist at this location, it is automatically downloaded from Huggingface. Please make sure you have enough free space on your drive (about 4 GB). If you choose an individual path, please read the hints in the notebook.
 
-6. Insert the copied path into the field "models_path_gdrive" at the step "Set Model Path". Remove the filename and the last "/" at the end. The path should now look for example like this ```/content/drive/MyDrive/SD/models```. Click on the arrow at the left and wait until finished.
+6. Execute the step "Setup Environment".
 
-7. Execute the step "Setup Environment".
+7. Execute the step "Python Definitions".
 
-8. Execute the step "Python Definitions".
+8. Execute the step "Select and Load Model". In the selector for the model files there is currently only one entry. When v1.5 has been released, this model will be added to the selector. If the model file doesn't exist at the location you selected above, it will automatically be downloaded from Huggingface. Please make sure you have enough free space on your drive (about 4 GB). It is necessary, that you created an account on Huggingface and accepted the terms of service. Otherwise it's not possible to download the file. You will also need the Huggingface access token you created before.
 
-9. Execute the step "Select and Load Model". In the selector for the model files there is currently only one entry. When v1.5 has been released, this model will be added to the selector.
-
-10. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
+9. Click on the arrow left to "Waiting for GIMP requests". The arrow on the left won't stop spinning in this case. If everything is okay, you should see something like this:
 ```
  * Serving Flask app "__main__" (lazy loading)
  * Environment: production
@@ -79,7 +77,7 @@ INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Traffic stats available on http://127.0.0.1:4040
  ```
  
-12. Copy the URL from above, which reads like ```https://*.trycloudflare.com```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
+10. Copy the URL from above, which reads like ```https://*.trycloudflare.com```. This is the URL, which is used for the communication between the GIMP plugin and the server. 
 
 ## Generate images
 Now we are ready for generating images.
