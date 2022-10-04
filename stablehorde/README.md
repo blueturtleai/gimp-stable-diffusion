@@ -40,6 +40,13 @@ Now we are ready for generating images.
 
 3. Click on the OK button. The values you inserted into the dialog and the init image will be transmitted to the server, which starts now generating the image. On the colab browser tab you can see what's going on. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
 
+#### Limitations
+   - Image size: Currently only 512x512 is possible. In general stablehorde can also generate larger images, but not all servers in the cluster are able to do this. To make sure, that your images are generated as fast as possible, it's highly recommended you generated only 512x512. As soon as there are more servers in the cluster, which support larger images, it will be possible to generate larger sizes.
+
+   - Generation speed: Stablehorde is a cluster of stable diffusion servers run by volunteers. The generation speed depends on how many servers are in the cluster, which hardware they use and how many others want to generate with stablehorde. The upside is, that Stablehorde is free to use, the downside that the generation speed is unpredictable.
+
+   - Privacy: The privacy stablehorde offers is similar like if you generate in a public discord channel. So, please assume, that neither your prompts nor your generated images are private.
+
 ## Troubleshooting
 ### GIMP
 #### AI menu is not shown
