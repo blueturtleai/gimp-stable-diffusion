@@ -7,7 +7,7 @@ Please check HISTORY.md for the latest changes.
 ## Installation
 ### Download files
 
-To download the files of this repository click on "Code" and select "Download ZIP". In the ZIP you will find the file "gimp-stable-diffusion-horde.py". This is the code for the GIMP plugin. You don't need the other files in the ZIP.
+To download the files of this repository click on "Code" and select "Download ZIP". In the ZIP you will find the file "gimp-stable-diffusion-horde.py" in the subfolder "stablehorde". This is the code for the GIMP plugin. You don't need the other files in the ZIP.
 
 ### GIMP
 
