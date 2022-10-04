@@ -36,7 +36,7 @@ Now we are ready for generating images.
 
    - **API key:** If you don't enter an API key, you run the image generation as anonymous. The downside is, that you will have then the lowest priority in the generation queue. For that reason it is recommended generating an API key on [stablehorde](https://stablehorde.net).
 
-   - **Max Wait:** The maximum time in minutes  you want to wait until image generation is finished.
+   - **Max Wait:** The maximum time in minutes you want to wait until image generation is finished.
 
 3. Click on the OK button. The values you inserted into the dialog will be transmitted to the server, which dispatches the request now to one of the stablediffusion servers in the cluster. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
 
@@ -56,6 +56,8 @@ Now we are ready for generating images.
 #### AI menu is not shown
 ##### Linux
    - If you get this error ```gimp: LibGimpBase-WARNING: gimp: gimp_wire_read(): error```, it's very likely, that you have a GIMP version installed, which doesn't include Python. Check, if you have got the menu "Filters > Python-Fu > Console". If it is missing, please install GIMP from here: https://flathub.org/apps/details/org.gimp.GIMP.
+  
+  - Please try https://flathub.org/apps/details/org.gimp.GIMP if you have got any other problems.
 
 ##### macOS
    - Please double check, if the permissions of the plugin py file are set to 755. It seems, that changing permissions doesn't work via the file manager. Please open a terminal, cd to the plugins directory and run "chmod ugo+x *py".
