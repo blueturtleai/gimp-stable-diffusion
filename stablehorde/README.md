@@ -1,6 +1,6 @@
 # gimp-stable-diffusion-horde
 
-This repository includes a GIMP plugin for communication with the [stablehorde](https://stablehorde.net) cluster.
+This repository includes a GIMP plugin for communication with the [stablehorde](https://stablehorde.net) cluster. You can created stablediffusion images for free without running a colab notebook or a local server.
 
 Please check HISTORY.md for the latest changes. 
 
