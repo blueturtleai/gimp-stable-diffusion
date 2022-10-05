@@ -1,6 +1,6 @@
 # gimp-stable-diffusion-horde
 
-This repository includes a GIMP plugin for communication with the [stablehorde](https://stablehorde.net) cluster. You can create stablediffusion images for free without running a colab notebook or a local server. Please check the section "Generate Images/Limitations" to understand if this is a good fit for you.
+This repository includes a GIMP plugin for communication with the [stablehorde](https://stablehorde.net) cluster. You can create stable-diffusion images for free without running a colab notebook or a local server. Please check the section "Limitations" to better understand where the limits are.
 
 Please check HISTORY.md for the latest changes. 
 
@@ -13,7 +13,7 @@ To download the files of this repository click on "Code" and select "Download ZI
 
 The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excluded is 2.99, because it's already Python 3 based.
 
-1. Start GIMP and open the preferences dialog via edit/preferences and scroll down to "folders". Expand "folders" and click on "plug-ins". Select the folder which includes your username and copy the path. 
+1. Start GIMP and open the preferences dialog via "edit/preferences" and scroll down to "folders". Expand "folders" and click on "plug-ins". Select the folder which includes your username and copy the path. 
 
 2. Open the file explorer, navigate to this directory and copy the file "gimp-stable-diffusion.py" from the repository into this directory. If you are on MacOS or Linux, change the file permissions to 755.
 
@@ -36,20 +36,20 @@ Now we are ready for generating images.
 
    - **API key:** If you don't enter an API key, you run the image generation as anonymous. The downside is, that you will have then the lowest priority in the generation queue. For that reason it is recommended generating an API key on [stablehorde](https://stablehorde.net).
 
-   - **Max Wait:** The maximum time in minutes you want to wait until image generation is finished.
+   - **Max Wait:** The maximum time in minutes you want to wait until image generation is finished. When the max time is reached, a timeout happens and the generation request is stopped.
 
-3. Click on the OK button. The values you inserted into the dialog will be transmitted to the server, which dispatches the request now to one of the stablediffusion servers in the cluster. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
+3. Click on the OK button. The values you inserted into the dialog will be transmitted to the server, which dispatches the request now to one of the stable-diffusion servers in the cluster. Your generation request is added to queue. You can see the queue position and the remaining wait time in the status bar of the dialog. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
 
-#### Limitations
-   - **Stability:** Stablehorde is still pretty new and under heavy development. So, it's not unlikely, that the servers are not available for some time or unpredicted errors occur.
+## Limitations
+   - **Stability:** Stablehorde is still pretty new and under heavy development. So, it's not unlikely, that the servers are not available for some time or unexpected errors occur.
 
-   - **Image size:** Currently only 512x512 is possible. In general stablehorde can also generate larger images, but not all servers in the cluster are able to do this. To make sure, that your images are generated as fast as possible, it's highly recommended you generate only 512x512. As soon as there are more servers in the cluster, which support larger images, it will be possible to generate larger sizes.
+   - **Image size:** Currently only 512x512 is possible. In general stablehorde can also generate larger images, but not all servers in the cluster are able to do this. To make sure, that your images are generated as fast as possible, the plugin currently generates only 512x512. As soon as there are more servers in the cluster, which support larger images, it will be possible to generate larger sizes.
 
-   - **Generation speed:** Stablehorde is a cluster of stable diffusion servers run by volunteers. The generation speed depends on how many servers are in the cluster, which hardware they use and how many others want to generate with stablehorde. The upside is, that Stablehorde is free to use, the downside that the generation speed is unpredictable.
+   - **Generation speed:** Stablehorde is a cluster of stable diffusion servers run by volunteers. The generation speed depends on how many servers are in the cluster, which hardware they use and how many others want to generate with stablehorde. The upside is, that stablehorde is free to use, the downside that the generation speed is unpredictable.
 
-   - **Privacy:** The privacy stablehorde offers is similar like if you generate in a public discord channel. So, please assume, that neither your prompts nor your generated images are private.
+   - **Privacy:** The privacy stablehorde offers is similar to generating in a public discord channel. So, please assume, that neither your prompts nor your generated images are private.
    
-   - **Features:** Currently only text2img is available. As soon as stablehorde supports img2img and inpainting, this will be available in the plugin too.
+   - **Features:** Currently only text2img is available. As soon as stablehorde supports img2img and in-/out-painting, this will be available in the plugin too.
 
 ## Troubleshooting
 ### GIMP
