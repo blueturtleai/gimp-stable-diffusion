@@ -22,7 +22,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excl
 ## Generate images
 Now we are ready for generating images.
 
-1. Start GIMP and open any image or create a new one. This image is in general not necessary, but currently needed because otherwise the new menuitem can't be selected.
+1. Start GIMP and open any image or create a new one. The only purpose of the image is, that the menuitem for generating the images will be enabled.
 
 2. Select the new AI/Stablehorde text2img menu item. A dialog will open, where you can enter the details for the image generation.
 
