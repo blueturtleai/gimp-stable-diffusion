@@ -32,6 +32,8 @@ Now we are ready for generating images.
 
    - **Seed:** This parameter is optional. If it is empty, a random seed will be generated on the server. If you use a seed, the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified. You find the seed in an additional layer at the top left. 
 
+   - **NSFW:** If you want to send a prompt, which is excplicitly NSFW (Not Safe For Work). If you flag your request as NSFW, only servers which accept NSFW prompts work on the request. If you don't flag the prompt and the created image is NSFW, it's very likely, you will receive a black image.
+
    - **Prompt:** How the generated image should look like.
 
    - **API key:** This parameter is optional. If you don't enter an API key, you run the image generation as anonymous. The downside is, that you will have then the lowest priority in the generation queue. For that reason it is recommended registering for free on [stablehorde](https://stablehorde.net) and getting an API key.
