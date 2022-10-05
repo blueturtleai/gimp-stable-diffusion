@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.0.0
+# v1.0.1
 
 import urllib2
 import tempfile
@@ -78,11 +78,11 @@ def checkStatus():
    elif data["done"] == True:
       return
 
-def text2img(image, drawable, promptStrength, steps, seed, prompt, apikey, maxWaitMin):
+def text2img(image, drawable, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
    pdb.gimp_progress_init("", None)
 
    global checkMax
-   checkMax = (maxWaitMin * 60)/CHECK_WAIT     
+   checkMax = (maxWaitMin * 60)/CHECK_WAIT
 
    data = {
       "prompt": prompt,
@@ -93,14 +93,14 @@ def text2img(image, drawable, promptStrength, steps, seed, prompt, apikey, maxWa
          "steps": int(steps),
          "seed": seed
       },
-      "nsfw": False,
-      "censor_nsfw": True
+      "nsfw": nsfw,
+      "censor_nsfw": False
    }
    
    data = json.dumps(data)
-   
+
    apikey = "0000000000" if not apikey else apikey
-   
+
    headers = {"Content-Type": "application/json", "Accept": "application/json", "apikey": apikey}
    url = API_ROOT + "generate/async"
 
@@ -138,6 +138,7 @@ register(
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
       (PF_STRING, "seed", "Seed (optional)", ""),
+      (PF_TOGGLE, "nsfw", "NSFW", False),
       (PF_STRING, "prompt", "Prompt", ""),
       (PF_STRING, "apiKey", "API key (optional)", ""),
       (PF_SLIDER, "maxWaitMin", "Max Wait (minutes)", 5, (1, 10, 1))
