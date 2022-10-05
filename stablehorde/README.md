@@ -34,7 +34,7 @@ Now we are ready for generating images.
 
    - **Prompt:** How the generated image should look like.
 
-   - **API key:** If you don't enter an API key, you run the image generation as anonymous. The downside is, that you will have then the lowest priority in the generation queue. For that reason it is recommended generating an API key on [stablehorde](https://stablehorde.net).
+   - **API key:** If you don't enter an API key, you run the image generation as anonymous. The downside is, that you will have then the lowest priority in the generation queue. For that reason it is recommended registering for free on [stablehorde](https://stablehorde.net) and getting an API key.
 
    - **Max Wait:** The maximum time in minutes you want to wait until image generation is finished. When the max time is reached, a timeout happens and the generation request is stopped.
 
