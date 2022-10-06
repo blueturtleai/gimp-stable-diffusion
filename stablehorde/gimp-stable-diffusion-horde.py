@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.0.1
+# v1.0.2
 
 import urllib2
 import tempfile
@@ -9,9 +9,10 @@ import base64
 import json
 import ssl
 import sched, time
-
+import gimp
 from gimpfu import *
 
+VERSION = 102
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
 
@@ -26,6 +27,26 @@ s = sched.scheduler(time.time, time.sleep)
 
 checkCounter = 0
 id = None
+
+def checkUpdate():
+  try:
+     gimp.get_data("update_checked")
+     updateChecked = True
+  except Exception as ex:
+     updateChecked = False
+
+  if updateChecked is False:
+     try:
+        url = "https://raw.githubusercontent.com/blueturtleai/gimp-stable-diffusion/main/stablehorde/version.json"
+        response = urllib2.urlopen(url)
+        data = response.read()
+        data = json.loads(data)
+        gimp.set_data("update_checked", "1")
+
+        if VERSION < int(data["version"]):
+           pdb.gimp_message(data["message"])
+     except Exception as ex:
+        ex = ex
 
 def displayGenerated(images):
    color = pdb.gimp_context_get_foreground()
@@ -96,7 +117,7 @@ def text2img(image, drawable, promptStrength, steps, seed, nsfw, prompt, apikey,
       "nsfw": nsfw,
       "censor_nsfw": False
    }
-   
+
    data = json.dumps(data)
 
    apikey = "0000000000" if not apikey else apikey
@@ -122,6 +143,9 @@ def text2img(image, drawable, promptStrength, steps, seed, nsfw, prompt, apikey,
       displayGenerated(images)
    except Exception as ex:
       raise ex
+   finally:
+      pdb.gimp_progress_end()
+      checkUpdate()
 
    return
 
