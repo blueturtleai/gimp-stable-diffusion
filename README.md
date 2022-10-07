@@ -2,6 +2,8 @@
 
 This repository includes a GIMP plugin for communication with a stable-diffusion server and a Google colab notebook for running the server.
 
+**Do you want to generate stable-diffusion images in GIMP without running a Colab notebook? [Check out the GIMP plugin](https://github.com/blueturtleai/gimp-stable-diffusion/tree/main/stablehorde) which uses stablehorde as backend (currently only text2img).**
+
 Please check HISTORY.md for the latest changes. 
 
 Click here [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blueturtleai/gimp-stable-diffusion/blob/main/gimp-stable-diffusion.ipynb) to open the notebook, if you already read the setup instructions below.
