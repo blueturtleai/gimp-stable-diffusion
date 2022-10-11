@@ -91,6 +91,10 @@ Stop the container.
 ```
 docker stop <container name>
 ```
+If you want to run the stable-diffusion server the next time, just execute
+```
+docker run -d -p 5000:5000 --gpus all stable-diffusion
+```
 
 ## Generate images
 Now we are ready for generating images.
