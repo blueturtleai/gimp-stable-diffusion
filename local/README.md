@@ -34,7 +34,7 @@ The model file includes all the data which is needed for stable-diffusion to gen
 4. Click on "New Token", enter a name, select "Read" as role, click on create and copy the token.
 
 #### Local server
-If you want to run the server on Windows 11, WSL2 needs to be prepared before. Please follow [these instructions](https://github.com/replicate/cog/blob/main/docs/wsl2/wsl2.md) until after you reach executing "wsl.exe" in 7. Afterwards please start with 2. from the instructions below, as Docker is already installed.
+If you want to run the server on Windows 11, WSL2 needs to be prepared before. Please follow [these instructions](https://github.com/blueturtleai/cog/blob/main/docs/wsl2/wsl2.md) until after you reach executing "wsl.exe" in 7. Afterwards please start with 2. from the instructions below, as Docker is already installed.
 
 **1. Install and start docker**
 
