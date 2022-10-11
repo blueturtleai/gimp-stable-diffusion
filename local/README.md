@@ -77,7 +77,7 @@ curl http://localhost:5000/predictions -X POST \
 -H 'Content-Type: application/json' \
 -d '{"input": {"prompt": "A beautiful day, digital painting"}}'
 ```
-If the test was successul, the generated image will be shown as a base64 encoded very long string.
+If the test was successful, the generated image will be shown as a base64 encoded very long string.
 
 **Stop stable-diffusion server**
 
