@@ -54,17 +54,17 @@ sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/dow
 sudo chmod +x /usr/local/bin/cog
 sudo yum install git -y
 git clone https://github.com/blueturtleai/cog-stable-diffusion
+cd cog-stable-diffusion
 ```
 
 **3. Install stable-diffusion server**
 ```
-cd cog-stable-diffusion
 cog run script/download-weights <your huggingface token>
+sudo chown -R $USER .
 ```
 
 **4. Create docker image and start stable-diffusion server**
 ```
-sudo chown -R $USER .
 cog build -t stable-diffusion
 docker run -d -p 5000:5000 --gpus all stable-diffusion
 ```
