@@ -79,7 +79,7 @@ curl http://localhost:5000/predictions -X POST \
 ```
 If the test was successful, the generated image will be shown as a base64 encoded very long string.
 
-**Stop stable-diffusion server**
+**6. Stop stable-diffusion server**
 
 If you are done generating images, you can stop the server that way.
 
