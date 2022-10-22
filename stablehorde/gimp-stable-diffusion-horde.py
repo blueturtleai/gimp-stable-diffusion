@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.0.2
+# v1.1.0
 
 import urllib2
 import tempfile
@@ -12,7 +12,8 @@ import sched, time
 import gimp
 from gimpfu import *
 
-VERSION = 102
+VERSION = 110
+INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
 
@@ -22,6 +23,7 @@ checkMax = None
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
+initFile = r"{}".format(os.path.join(tempfile.gettempdir(), INIT_FILE))
 generatedFile = r"{}".format(os.path.join(tempfile.gettempdir(), GENERATED_FILE))
 s = sched.scheduler(time.time, time.sleep)
 
@@ -47,6 +49,12 @@ def checkUpdate():
            pdb.gimp_message(data["message"])
      except Exception as ex:
         ex = ex
+
+def getImageData(image, drawable):
+   pdb.file_png_save_defaults(image, drawable, initFile, initFile)
+   initImage = open(initFile, "rb")
+   encoded = base64.b64encode(initImage.read())
+   return encoded
 
 def displayGenerated(images):
    color = pdb.gimp_context_get_foreground()
@@ -99,35 +107,42 @@ def checkStatus():
    elif data["done"] == True:
       return
 
-def text2img(image, drawable, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
+def generate(image, drawable, isInit, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
    pdb.gimp_progress_init("", None)
 
    global checkMax
    checkMax = (maxWaitMin * 60)/CHECK_WAIT
 
+   params = {
+      "cfg_scale": float(promptStrength),
+      "height": 512,
+      "width": 512,
+      "steps": int(steps),
+      "seed": seed
+   }
+
    data = {
+      "params": params,
       "prompt": prompt,
-      "params": {
-         "cfg_scale": float(promptStrength),
-         "height": 512,
-         "width": 512,
-         "steps": int(steps),
-         "seed": seed
-      },
       "nsfw": nsfw,
       "censor_nsfw": False
    }
 
-   data = json.dumps(data)
-
-   apikey = "0000000000" if not apikey else apikey
-
-   headers = {"Content-Type": "application/json", "Accept": "application/json", "apikey": apikey}
-   url = API_ROOT + "generate/async"
-
-   request = urllib2.Request(url=url, data=data, headers=headers)
-
    try:
+      if isInit is True:
+         init = getImageData(image, drawable)
+         data.update({"source_image": init})
+         params.update({"denoising_strength": (1 - float(initStrength))})
+
+      data = json.dumps(data)
+
+      apikey = "0000000000" if not apikey else apikey
+
+      headers = {"Content-Type": "application/json", "Accept": "application/json", "apikey": apikey}
+      url = API_ROOT + "generate/async"
+
+      request = urllib2.Request(url=url, data=data, headers=headers)
+
       response = urllib2.urlopen(request)
       data = response.read()
 
@@ -150,25 +165,27 @@ def text2img(image, drawable, promptStrength, steps, seed, nsfw, prompt, apikey,
    return
 
 register(
-   "text2img",
-   "text2img",
-   "text2img",
+   "stable-horde",
+   "stable-horde",
+   "stable-horde",
    "BlueTurtleAI",
    "BlueTurtleAI",
    "2022",
-   "<Image>/AI/Stablehorde text2img",
+   "<Image>/AI/Stablehorde",
    "*",
    [
+      (PF_TOGGLE, "isInit", "image -> image", False),
+      (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0, 1, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
       (PF_STRING, "seed", "Seed (optional)", ""),
       (PF_TOGGLE, "nsfw", "NSFW", False),
       (PF_STRING, "prompt", "Prompt", ""),
       (PF_STRING, "apiKey", "API key (optional)", ""),
-      (PF_SLIDER, "maxWaitMin", "Max Wait (minutes)", 5, (1, 10, 1))
+      (PF_SLIDER, "maxWaitMin", "Max Wait (minutes)", 5, (1, 5, 1))
    ],
    [],
-   text2img
+   generate
 )
 
 main()
