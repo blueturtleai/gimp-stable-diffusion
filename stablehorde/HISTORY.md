@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.1.0
+Changes
+- img2img is now supported.
+
 ### 1.0.2
 Changes
 - If a new version of the plugin exists, a message is now displayed.
