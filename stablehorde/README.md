@@ -17,14 +17,14 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excl
 
 2. Open the file explorer, navigate to this directory and copy the file "gimp-stable-diffusion.py" from the repository into this directory. If you are on MacOS or Linux, change the file permissions to 755.
 
-3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. Please check in this case "Troubleshooting/GIMP" for possible solutions. The menu has one item "Stablehorde text2img". This item can't currently be selected. This only works, when you opened an image before. More about this below.
+3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. Please check in this case "Troubleshooting/GIMP" for possible solutions. The menu has one item "Stablehorde". This item can't currently be selected. This only works, when you opened an image before. More about this below.
 
 ## Generate images
 Now we are ready for generating images.
 
 1. Start GIMP and open any image or create a new one. The only purpose of the image is, that the menuitem for generating the images will be enabled.
 
-2. Select the new AI/Stablehorde text2img menu item. A dialog will open, where you can enter the details for the image generation.
+2. Select the new AI/Stablehorde menu item. A dialog will open, where you can enter the details for the image generation.
 
    - **img -> img:** If you want to generate an image based only on your prompt or based on an init image and your prompt. For the latter, just press the button and open the image, which should be used as init image.
 
