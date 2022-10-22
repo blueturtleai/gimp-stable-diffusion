@@ -32,7 +32,9 @@ Now we are ready for generating images.
 
    - **Seed:** This parameter is optional. If it is empty, a random seed will be generated on the server. If you use a seed, the same image is generated again in the case the same parameters for init strength, steps, etc. are used. A slightly different image will be generated, if the parameters are modified. You find the seed in an additional layer at the top left. 
 
-   - **NSFW:** If you want to send a prompt, which is excplicitly NSFW (Not Safe For Work). If you flag your request as NSFW, only servers, which accept NSFW prompts, work on the request. It's very likely, that it takes then longer than usual to generate the image. If you don't flag the prompt, but it is NSFW, you will receive a black image.
+   - **NSFW:** If you want to send a prompt, which is excplicitly NSFW (Not Safe For Work). 
+      - If you flag your request as NSFW, only servers, which accept NSFW prompts, work on the request. It's very likely, that it takes then longer than usual to generate the image. If you don't flag the prompt, but it is NSFW, you will receive a black image.
+      - If you didn't flag your request as NSFW and don't prompt NSFW, you will receive in some cases a black image, although it's not NSFW (false positive). Just rerun the generation in that case.
 
    - **Prompt:** How the generated image should look like.
 
