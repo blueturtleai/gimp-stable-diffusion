@@ -74,7 +74,7 @@ Now we are ready for generating images.
    - Open a terminal an try to run the plugin py file manually via ```python <path-to-plugin-folder>/gimp-stable-diffusion.py```. You should see the error message, that "gimpfu" is unknown. Make sure, that you are running Python 2, as this version is used by GIMP. If other errors occur, please reinstall GIMP.
 
 ## FAQ
-**Why is the generated image smaller than opened image?** Stable-diffusion only generates image sizes which are a multiple of 64. This means, if your opened image has a size of 650x512, the generated image will have a size of 640x512.
+**Why is the generated image smaller than the opened image?** Stable-diffusion only generates image sizes which are a multiple of 64. This means, if your opened image has a size of 650x512, the generated image will have a size of 640x512.
 
 **Will GIMP 3 be supported?** Yes, the plugin will be ported to GIMP 3.
 
