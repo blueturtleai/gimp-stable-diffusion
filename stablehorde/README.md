@@ -53,8 +53,6 @@ Now we are ready for generating images.
 ## Limitations
    - **Stability:** Stablehorde is still pretty new and under heavy development. So, it's not unlikely, that the servers are not available for some time or unexpected errors occur.
 
-   - **Image size:** Currently only 512x512 is possible. In general stablehorde can also generate larger images, but not all servers in the cluster are able to do this. To make sure, that your images are generated as fast as possible, the plugin currently generates only 512x512. As soon as there are more servers in the cluster, which support larger images, it will be possible to generate larger sizes.
-
    - **Generation speed:** Stablehorde is a cluster of stable-diffusion servers run by volunteers. The generation speed depends on how many servers are in the cluster, which hardware they use and how many others want to generate with stablehorde. The upside is, that stablehorde is free to use, the downside that the generation speed is unpredictable.
 
    - **Privacy:** The privacy stablehorde offers is similar to generating in a public discord channel. So, please assume, that neither your prompts nor your generated images are private.
