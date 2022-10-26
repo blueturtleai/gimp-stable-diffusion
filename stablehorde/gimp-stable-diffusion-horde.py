@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.1.0
+# v1.2.0
 
 import urllib2
 import tempfile
@@ -9,10 +9,11 @@ import base64
 import json
 import ssl
 import sched, time
+import math
 import gimp
 from gimpfu import *
 
-VERSION = 110
+VERSION = 120
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
@@ -108,27 +109,41 @@ def checkStatus():
       return
 
 def generate(image, drawable, isInit, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
+   if image.width < 512 or image.width > 1024 or image.height < 512 or image.height > 1024:
+      raise Exception("Invalid image size. Image needs to be between 512x512 and 1024x1024.")
+
    pdb.gimp_progress_init("", None)
 
    global checkMax
    checkMax = (maxWaitMin * 60)/CHECK_WAIT
 
-   params = {
-      "cfg_scale": float(promptStrength),
-      "height": 512,
-      "width": 512,
-      "steps": int(steps),
-      "seed": seed
-   }
-
-   data = {
-      "params": params,
-      "prompt": prompt,
-      "nsfw": nsfw,
-      "censor_nsfw": False
-   }
-
    try:
+      params = {
+         "cfg_scale": float(promptStrength),
+         "steps": int(steps),
+         "seed": seed
+      }
+
+      data = {
+         "params": params,
+         "prompt": prompt,
+         "nsfw": nsfw,
+         "censor_nsfw": False
+      }
+
+      if image.width % 64 != 0:
+         width = math.floor(image.width/64) * 64
+      else:
+         width = image.width
+
+      if image.height % 64 != 0:
+         height = math.floor(image.height/64) * 64
+      else:
+         height = image.height
+
+      params.update({"width": int(width)})
+      params.update({"height": int(height)})
+
       if isInit is True:
          init = getImageData(image, drawable)
          data.update({"source_image": init})
