@@ -78,7 +78,7 @@ Now we are ready for generating images.
 
 **Will GIMP 3 be supported?** Yes, the plugin will be ported to GIMP 3.
 
-**Will Img2img, In- and Out-Painting be supported?** Very likely everyhing will be supported. This depends on which features the stablehorde cluster supports.
+**Will In- and Out-Painting be supported?** Very likely everyhing will be supported. This depends on which features the stablehorde cluster supports.
 
 **How do I report an error or request a new feature?** Please open a new issue in this repository.
 
