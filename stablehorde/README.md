@@ -22,7 +22,9 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excl
 ## Generate images
 Now we are ready for generating images.
 
-1. Start GIMP and open any image or create a new one. The only purpose of the image is, that the menuitem for generating the images will be enabled.
+1. Start GIMP and create/open an image with a size between 512x512 and 1024x1024. The generated image has the size of the opened image or is a bit smaller. Check below for an explanation.
+   - Stable diffusion only generates image sizes which are a multiple of 64. This means, if your opened image has a size of 650x512, the generated image will have a size of 640x512.
+   - The larger the image, the longer you have to wait for generation. The reason is, that all servers in the cluster support 512x512, but not all larger sizes.
 
 2. Select the new AI/Stablehorde menu item. A dialog will open, where you can enter the details for the image generation.
 
@@ -74,6 +76,7 @@ Now we are ready for generating images.
    - Open a terminal an try to run the plugin py file manually via ```python <path-to-plugin-folder>/gimp-stable-diffusion.py```. You should see the error message, that "gimpfu" is unknown. Make sure, that you are running Python 2, as this version is used by GIMP. If other errors occur, please reinstall GIMP.
 
 ## FAQ
+**Why is the generated image smaller than opened image?** Stable-diffusion only generates image sizes which are a multiple of 64. This means, if your opened image has a size of 650x512, the generated image will have a size of 640x512.
 
 **Will GIMP 3 be supported?** Yes, the plugin will be ported to GIMP 3.
 
