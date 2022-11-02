@@ -28,7 +28,10 @@ Now we are ready for generating images.
 
 2. Select the new AI/Stablehorde menu item. A dialog will open, where you can enter the details for the image generation.
 
-   - **img -> img:** If you want to generate an image based only on your prompt or based on an init image and your prompt. For the latter, just press the button and open the image, which should be used as init image.
+   - **Generation Mode:** 
+      - **Text -> Image:** Generate an image based on your prompt.
+      - **Image -> Image:** Generate an image based on an init image and on your prompt.
+      - **Inpainting:** Erase a part of an image and generate a new image which has the erased part filled. The erased part is filled based on your prompt.
 
    - **Init Strength:** How much the AI should take the init image into account. The higher the value, the more will the generated image look like the init image. 0.3 is a good value to use.
 
@@ -57,7 +60,7 @@ Now we are ready for generating images.
 
    - **Privacy:** The privacy stablehorde offers is similar to generating in a public discord channel. So, please assume, that neither your prompts nor your generated images are private.
    
-   - **Features:** Currently only text2img is available. As soon as stablehorde supports img2img and in-/out-painting, this will be available in the plugin too.
+   - **Features:** Currently text2img, img2img and inpainting are supported. As soon as stablehorde supports out-painting, this will be available in the plugin too.
 
 ## Troubleshooting
 ### GIMP
@@ -78,7 +81,7 @@ Now we are ready for generating images.
 
 **Will GIMP 3 be supported?** Yes, the plugin will be ported to GIMP 3.
 
-**Will In- and Out-Painting be supported?** Very likely everyhing will be supported. This depends on which features the stablehorde cluster supports.
+**Will outpainting be supported?** Pretty likely outpainting will be supported. This depends on which features the stablehorde cluster supports.
 
 **How do I report an error or request a new feature?** Please open a new issue in this repository.
 
