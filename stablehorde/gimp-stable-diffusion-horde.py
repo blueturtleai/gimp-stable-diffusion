@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.2.0
+# v1.3.0
 
 import urllib2
 import tempfile
@@ -11,9 +11,10 @@ import ssl
 import sched, time
 import math
 import gimp
+
 from gimpfu import *
 
-VERSION = 120
+VERSION = 130
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
@@ -108,9 +109,15 @@ def checkStatus():
    elif data["done"] == True:
       return
 
-def generate(image, drawable, isInit, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
+def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
    if image.width < 512 or image.width > 1024 or image.height < 512 or image.height > 1024:
       raise Exception("Invalid image size. Image needs to be between 512x512 and 1024x1024.")
+
+   if prompt == "":
+      raise Exception("Please enter a prompt.")
+
+   if mode == "MODE_INPAINTING" and drawable.has_alpha == 0:
+      raise Exception("Invalid image. For inpainting an alpha channel is needed.")
 
    pdb.gimp_progress_init("", None)
 
@@ -144,10 +151,17 @@ def generate(image, drawable, isInit, initStrength, promptStrength, steps, seed,
       params.update({"width": int(width)})
       params.update({"height": int(height)})
 
-      if isInit is True:
+      if mode == "MODE_IMG2IMG":
          init = getImageData(image, drawable)
          data.update({"source_image": init})
+         data.update({"source_processing": "img2img"})
          params.update({"denoising_strength": (1 - float(initStrength))})
+      elif mode == "MODE_INPAINTING":
+         init = getImageData(image, drawable)
+         models = ["stable_diffusion_inpainting"]
+         data.update({"source_image": init})
+         data.update({"source_processing": "inpainting"})
+         data.update({"models": models})
 
       data = json.dumps(data)
 
@@ -189,7 +203,11 @@ register(
    "<Image>/AI/Stablehorde",
    "*",
    [
-      (PF_TOGGLE, "isInit", "image -> image", False),
+      (PF_RADIO, "mode", "Generation Mode", "MODE_TEXT2IMG", (
+         ("Text -> Image", "MODE_TEXT2IMG"),
+         ("Image -> Image", "MODE_IMG2IMG"),
+         ("Inpainting", "MODE_INPAINTING")
+      )),
       (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0, 1, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
