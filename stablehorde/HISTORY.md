@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.3.0
+Changes
+- Inpainting is supported now
+
 ### 1.2.0
 Changes
 - Now images with sizes between 512x512 and 1024x1024 can be generated. Before only 512x512.
