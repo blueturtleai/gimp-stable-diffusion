@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.3.0
+# v1.3.1
 
 import urllib2
 import tempfile
@@ -14,7 +14,7 @@ import gimp
 
 from gimpfu import *
 
-VERSION = 130
+VERSION = 131
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
@@ -100,9 +100,12 @@ def checkStatus():
 
    pdb.gimp_progress_set_text(text)
 
-   if checkCounter < checkMax and data["done"] == False:
-      s.enter(CHECK_WAIT, 1, checkStatus, ())
-      s.run()
+   if checkCounter < checkMax and data["done"] is False:
+      if data["is_possible"] is True:
+         s.enter(CHECK_WAIT, 1, checkStatus, ())
+         s.run()
+      else:
+         raise Exception("Currently no worker available to generate your image. Please try again later.")
    elif checkCounter == checkMax:
       minutes = (checkMax * CHECK_WAIT)/60
       raise Exception("Image generation timed out after " + str(minutes) + " minutes. Please try it again later.")
@@ -110,8 +113,8 @@ def checkStatus():
       return
 
 def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
-   if image.width < 512 or image.width > 1024 or image.height < 512 or image.height > 1024:
-      raise Exception("Invalid image size. Image needs to be between 512x512 and 1024x1024.")
+   if image.width < 384 or image.width > 1024 or image.height < 384 or image.height > 1024:
+      raise Exception("Invalid image size. Image needs to be between 384x384 and 1024x1024.")
 
    if prompt == "":
       raise Exception("Please enter a prompt.")
