@@ -1,5 +1,10 @@
 # History
 ## GIMP Plugin
+### 1.3.1
+Changes
+- In the case no worker is available for image generation, now an error is displayed.
+- Minimum size has been reduced from 512x512 to 384x384.
+ 
 ### 1.3.0
 Changes
 - Inpainting is supported now
