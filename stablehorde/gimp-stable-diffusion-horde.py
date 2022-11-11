@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.3.1
+# v1.3.2
 
 import urllib2
 import tempfile
@@ -14,7 +14,7 @@ import gimp
 
 from gimpfu import *
 
-VERSION = 131
+VERSION = 132
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
@@ -188,6 +188,20 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
       checkStatus()
       images = getImages()
       displayGenerated(images)
+
+   except urllib2.HTTPError as ex:
+      try:
+         data = ex.read()
+         data = json.loads(data)
+
+         if "message" in data:
+            message = data["message"]
+         else:
+            message = str(ex)
+      except Exception:
+         message = str(ex)
+
+      raise Exception(message)
    except Exception as ex:
       raise ex
    finally:
