@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.3.2
+Changes
+- Now detailed error messages are displayed. Before only the standard HTTP error messages.
+
 ### 1.3.1
 Changes
 - In the case no worker is available for image generation, now a message is displayed.
