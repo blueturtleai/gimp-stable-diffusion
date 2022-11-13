@@ -32,6 +32,10 @@
 Initial version
 
 ## Stable-Diffusion server
+### 1.2.1
+#### Changes
+- Stable-Diffusion Model v1.5 is now supported.
+
 ### 1.2.0
 #### Changes
 - It's no longer necessary to upload model files yourself to your Google drive. If a model file is missing, it is automatically downloaded from Huggingface. A Huggingface account and acceptance of the terms of service is still needed.
