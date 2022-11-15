@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.0.0
+# v1.1.0
 
 import urllib2
 import tempfile
@@ -9,10 +9,11 @@ import base64
 import json
 import re
 import random
+import math
 import gimp
 from gimpfu import *
 
-VERSION = 100
+VERSION = 110
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ENDPOINT = "predictions"
@@ -84,16 +85,39 @@ def displayGenerated(images):
    pdb.gimp_context_set_foreground(color)
    return
 
-def generate(image, drawable, isInit, initStrength, promptStrength, steps, seed, prompt, url):
+def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, prompt, url):
+   if image.width < 384 or image.width > 1024 or image.height < 384 or image.height > 1024:
+      raise Exception("Invalid image size. Image needs to be between 384x384 and 1024x1024.")
+
+   if image.width * image.height > 786432:
+      raise Exception("Invalid image size. Maximum size is 1024x768 or 768x1024.")
+
+   if prompt == "":
+      raise Exception("Please enter a prompt.")
+
+   if mode == "MODE_INPAINTING" and drawable.has_alpha == 0:
+      raise Exception("Invalid image. For inpainting an alpha channel is needed.")
+
    pdb.gimp_progress_init("", None)
 
    input = {
       "prompt": prompt,
-      "width": 512,
-      "height": 512,
       "num_inference_steps": int(steps),
       "guidance_scale": float(promptStrength)
    }
+
+   if image.width % 64 != 0:
+      width = math.floor(image.width/64) * 64
+   else:
+      width = image.width
+
+   if image.height % 64 != 0:
+      height = math.floor(image.height/64) * 64
+   else:
+      height = image.height
+
+   input.update({"width": int(width)})
+   input.update({"height": int(height)})
 
    if not seed:
       seed = random.randint(0, 2**31)
@@ -102,10 +126,13 @@ def generate(image, drawable, isInit, initStrength, promptStrength, steps, seed,
 
    input.update({"seed": seed})
 
-   if isInit is True:
+   if mode == "MODE_IMG2IMG" or mode == "MODE_INPAINTING":
       imageData = getImageData(image, drawable)
       input.update({"init_image": imageData})
       input.update({"prompt_strength": (1 - float(initStrength))})
+
+   if mode == "MODE_INPAINTING":
+      input.update({"mask": imageData})
 
    data = {"input": input}
    data = json.dumps(data)
@@ -151,7 +178,11 @@ register(
    "<Image>/AI/Stable Local",
    "*",
    [
-      (PF_TOGGLE, "isInit", "Init Image", False),
+      (PF_RADIO, "mode", "Generation Mode", "MODE_TEXT2IMG", (
+         ("Text -> Image", "MODE_TEXT2IMG"),
+         ("Image -> Image", "MODE_IMG2IMG"),
+         ("Inpainting", "MODE_INPAINTING")
+      )),
       (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0.0, 1.0, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
