@@ -103,7 +103,10 @@ Now we are ready for generating images.
 
 2. Select the new "AI/Stable Local" menu item. A dialog will open, where you can enter the details for the image generation.
 
-   - **Init Image:** If you want to use an init image.
+  - **Generation Mode:** 
+      - **Text -> Image:** Generate an image based on your prompt.
+      - **Image -> Image:** Generate an image based on an init image and on your prompt.
+      - **Inpainting:** Erase a part of an image and generate a new image which has the erased part filled. The erased part is filled based on your prompt. Please read the section "Inpainting" below for an explanation how inpainting works.
 
    - **Init Strength:** How much the AI should take the init image into account. The higher the value, the more will the generated image look like the init image. 0.3 is a good value to use.
    
@@ -119,10 +122,15 @@ Now we are ready for generating images.
 
 3. Click on the OK button. The values you inserted into the dialog will be transmitted to the server. When the image has been generated successfully, it will be shown as a new image in GIMP. The used seed is shown at the top left in an additional layer.
 
+## Inpainting
+Inpainting means replacing a part of an existing image. For example if you don't like the face on an image, you can replace it. **Inpainting is currently still in experimental stage. So, please don't expect perfect results.** The experimental stage is caused by the server side and not by GIMP.
+
+For inpainting it's necessary to prepare the input image because the AI needs to know which part you want to replace. For this purpose you replace this image part by transparency. To do so, open the init image in GIMP and select "Layer/Transparency/Add alpha channel". Select now the part of the image which should be replaced and delete it. You can also use the eraser tool. 
+
+For the prompt you use now a description of the new image. For example the image shows currently "a little girl running over a meadow with a balloon" and you want to replace the balloon by a parachute. You just write now "a little girl running over a meadow with a parachute".
+
 ## Limitations
    - **Testing:** The local server runs on Linux, macOS and Windows 11. Due to limited availability, it has only been tested on Linux. If you run in any problems on macOS or Windows 11, please open an issue.
-
-   - **Inpainting:** Currently inpainting isn't available, as this needs some further testing. If the test was successful, it will be made available.
 
    - **NSFW:** The server doesn't support NSFW (Not Safe For Work) images. If the server generates a NSFW image, an error is displayed in GIMP.
 
