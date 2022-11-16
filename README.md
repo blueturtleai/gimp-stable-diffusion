@@ -12,9 +12,7 @@ Click here [![Open In Colab](https://colab.research.google.com/assets/colab-badg
 
 ## Overview
 
-The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugin offers the possibility to use img2img. img2img means, that you create an image in GIMP, which is then used as the base for the image creation in stable-diffusion. It also supports inpainting for the case you want to change parts of an existing image.
-
-
+The server exposes a REST API, which is used by the GIMP plugin to communicate with the server. Currently the plugins offers text2img, img2img and inpainting.
 
 https://user-images.githubusercontent.com/113246030/190710535-9fb23f88-954f-4f73-afea-1475c8690754.MOV
 
@@ -34,7 +32,7 @@ The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excl
 
 2. Open the file explorer, navigate to this directory and copy the file "gimp-stable-diffusion.py" from the repository into this directory. If you are on MacOS or Linux, change the file permissions to 755.
 
-3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. Please check in this case "Troubleshooting/GIMP" for possible solutions. The menu has one item "Stable img2img". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
+3. Restart GIMP. You should now see the new menu "AI". If you don't see this, something went wrong. Please check in this case "Troubleshooting/GIMP" for possible solutions. The menu has one item "Stable Colab". This item can't currently be selected. This only works, when you opened an image before. More about this, when the server is running.
 
 ### Stable-Diffusion server
 #### Prerequisites
