@@ -1,5 +1,10 @@
 # History
 ## GIMP Plugin
+### 1.2.0
+#### Changes
+- Now text2img is supported.
+- The dialog has been optimized.
+
 ### 1.1.2
 #### Changes
 - Exception handling further improved
@@ -32,6 +37,10 @@
 Initial version
 
 ## Stable-Diffusion server
+### 1.3.0
+Changes
+- Now text2img is supported.
+
 ### 1.2.1
 #### Changes
 - Stable-Diffusion Model v1.5 is now supported.
