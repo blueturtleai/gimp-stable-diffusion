@@ -90,11 +90,10 @@ Now we are ready for generating images.
 
 2. Select the new AI/Stable im2img menu item. A dialog will open, where you can enter the details for the image generation.
 
-   - **Inpainting:** If you want to inpaint. Please read the section "Inpainting" below for an explanation how inpainting works.
-   
-   - **Inpainting/Mask Brightness:** For future use. For now leave the value just unchanged.
-   
-   - **Inpainting/Mask Contrast:** For future use. For now leave the value just unchanged.
+   - **Generation Mode:** 
+      - **Text -> Image:** Generate an image based on your prompt.
+      - **Image -> Image:** Generate an image based on an init image and on your prompt.
+      - **Inpainting:** Erase a part of an image and generate a new image which has the erased part filled. The erased part is filled based on your prompt. Please read the section "Inpainting" below for an explanation how inpainting works.
     
    - **Init Strength:** How much the AI should take the init image into account. The higher the value, the more will the generated image look like the init image. 0.3 is a good value to use.
 
