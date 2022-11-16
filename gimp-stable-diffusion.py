@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.1.2
+# v1.2.0
 
 import urllib2
 import tempfile
@@ -9,13 +9,14 @@ import base64
 import json
 import re
 import ssl
+import math
 
 from gimpfu import *
 
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
-API_ENDPOINT = "api/img2img"
-API_VERSION = 4
+API_ENDPOINT = "api/generate"
+API_VERSION = 5
 
 HEADER_ACCEPT = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 HEADER_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
@@ -50,26 +51,48 @@ def displayGenerated(images):
    pdb.gimp_context_set_foreground(color)
    return
 
-def img2img(image, drawable, isInpainting, maskBrightness, maskContrast, initStrength, promptStrength, steps, seed, imageCount, prompt, url):
+def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, imageCount, prompt, url):
+   if image.width < 384 or image.width > 1024 or image.height < 384 or image.height > 1024:
+      raise Exception("Invalid image size. Image needs to be between 384x384 and 1024x1024.")
+
+   if prompt == "":
+      raise Exception("Please enter a prompt.")
+
+   if mode == "MODE_INPAINTING" and drawable.has_alpha == 0:
+      raise Exception("Invalid image. For inpainting an alpha channel is needed.")
+
+   pdb.gimp_progress_init("", None)
+
    data = {
-      "inpainting": bool(isInpainting),
-      "mask_brightness": float(maskBrightness),
-      "mask_contrast": float(maskContrast),
+      "mode": mode,
       "init_strength": float(initStrength),
       "prompt_strength": float(promptStrength),
       "steps": int(steps),
-      "width": int(image.width),
-      "height": int(image.height),
       "prompt": prompt,
       "image_count": int(imageCount),
       "api_version": API_VERSION
    }
 
+   if image.width % 64 != 0:
+      width = math.floor(image.width/64) * 64
+   else:
+      width = image.width
+
+   if image.height % 64 != 0:
+      height = math.floor(image.height/64) * 64
+   else:
+      height = image.height
+
+   data.update({"width": int(width)})
+   data.update({"height": int(height)})
+
+   if mode == "MODE_IMG2IMG" or mode == "MODE_INPAINTING":
+      imageData = getImageData(image, drawable)
+      data.update({"init_img": imageData})
+
    seed = -1 if not seed else int(seed)
    data.update({"seed": seed})
 
-   imageData = getImageData(image, drawable)
-   data.update({"init_img": imageData})
    data = json.dumps(data)
 
    url = url + "/" if not re.match(".*/$", url) else url
@@ -104,18 +127,20 @@ def img2img(image, drawable, isInpainting, maskBrightness, maskContrast, initStr
    return
 
 register(
-   "img2img",
-   "img2img",
-   "img2img",
+   "stable-colab",
+   "stable-colab",
+   "stable-colab",
    "BlueTurtleAI",
    "BlueTurtleAI",
    "2022",
-   "<Image>/AI/Stable img2img",
+   "<Image>/AI/Stable Colab",
    "*",
    [
-      (PF_TOGGLE, "isInpainting", "Inpainting", False),
-      (PF_SLIDER, "maskBrightness", "Inpainting\nMask Brightness", 1.0, (0.0, 1.0, 0.1)),
-      (PF_SLIDER, "maskContrast", "Inpainting\nMask Contrast", 1.0, (0.0, 1.0, 0.1)),
+      (PF_RADIO, "mode", "Generation Mode", "MODE_TEXT2IMG", (
+         ("Text -> Image", "MODE_TEXT2IMG"),
+         ("Image -> Image", "MODE_IMG2IMG"),
+         ("Inpainting", "MODE_INPAINTING")
+      )),
       (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0.0, 1.0, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
@@ -125,7 +150,7 @@ register(
       (PF_STRING, "url", "Backend root URL", "")
    ],
    [],
-   img2img
+   generate
 )
 
 main()
