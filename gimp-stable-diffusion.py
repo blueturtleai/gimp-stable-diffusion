@@ -16,7 +16,9 @@ from gimpfu import *
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ENDPOINT = "api/generate"
-API_VERSION = 5
+API_VERSION = 6
+
+SAMPLERS = ["ddim", "plms", "klms", "euler", "euler_ancestral", "dpm2", "dpm2_ancestral", "heun"]
 
 HEADER_ACCEPT = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
 HEADER_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0"
@@ -51,7 +53,7 @@ def displayGenerated(images):
    pdb.gimp_context_set_foreground(color)
    return
 
-def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, imageCount, prompt, url):
+def generate(image, drawable, mode, invertMask, sampler, initStrength, promptStrength, steps, seed, imageCount, prompt, url):
    if image.width < 384 or image.width > 1024 or image.height < 384 or image.height > 1024:
       raise Exception("Invalid image size. Image needs to be between 384x384 and 1024x1024.")
 
@@ -65,6 +67,8 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, i
 
    data = {
       "mode": mode,
+      "invertMask": invertMask,
+      "sampler": SAMPLERS[sampler],
       "init_strength": float(initStrength),
       "prompt_strength": float(promptStrength),
       "steps": int(steps),
@@ -141,6 +145,8 @@ register(
          ("Image -> Image", "MODE_IMG2IMG"),
          ("Inpainting", "MODE_INPAINTING")
       )),
+      (PF_BOOL, "invertMask", "Invert mask", False),
+      (PF_OPTION, "sampler", "Sampler", "ddim", SAMPLERS),
       (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0.0, 1.0, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
