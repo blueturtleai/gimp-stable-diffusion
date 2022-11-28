@@ -11,7 +11,7 @@ To download the files of this repository click on "Code" and select "Download ZI
 
 ### GIMP
 
-The plugin is tested in GIMP 2.10 and runs most likely in all 2.* releases. Excluded is 2.99, because it's already Python 3 based.
+To run the plugin GIMP 2.10 is needed.
 
 1. Start GIMP and open the preferences dialog via "edit/preferences" and scroll down to "folders". Expand "folders" and click on "plug-ins". Select the folder which includes your username and copy the path. 
 
