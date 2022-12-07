@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.3.3
+Changes
+- The new parameter r2 is transferred with value False. This disables for now the new Cloudflare r2 image download.
+
 ### 1.3.2
 Changes
 - Now detailed error messages are displayed. Before only the standard HTTP error messages.
