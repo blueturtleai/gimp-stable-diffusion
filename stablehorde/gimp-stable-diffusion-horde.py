@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.3.2
+# v1.3.3
 
 import urllib2
 import tempfile
@@ -14,7 +14,7 @@ import gimp
 
 from gimpfu import *
 
-VERSION = 132
+VERSION = 133
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
@@ -138,7 +138,8 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
          "params": params,
          "prompt": prompt,
          "nsfw": nsfw,
-         "censor_nsfw": False
+         "censor_nsfw": False,
+         "r2": False
       }
 
       if image.width % 64 != 0:
