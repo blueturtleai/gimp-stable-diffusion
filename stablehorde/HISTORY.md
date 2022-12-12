@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.3.4
+Changes
+- The generated images are now transferred via Cloudflare r2.
+
 ### 1.3.3
 Changes
 - The new parameter r2 is transferred with value False. This disables for now the new Cloudflare r2 image download.
