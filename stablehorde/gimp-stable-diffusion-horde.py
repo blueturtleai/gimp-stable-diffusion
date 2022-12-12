@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.3.3
+# v1.3.4
 
 import urllib2
 import tempfile
@@ -11,10 +11,11 @@ import ssl
 import sched, time
 import math
 import gimp
+import re
 
 from gimpfu import *
 
-VERSION = 133
+VERSION = 134
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
@@ -63,8 +64,14 @@ def displayGenerated(images):
    pdb.gimp_context_set_foreground((0, 0, 0))
 
    for image in images:
+      if re.match("^https.*", image["img"]):
+          response = urllib2.urlopen(image["img"])
+          bytes = response.read()
+      else:
+          bytes = base64.b64decode(image["img"])
+
       imageFile = open(generatedFile, "wb+")
-      imageFile.write(base64.b64decode(image["img"]))
+      imageFile.write(bytes)
       imageFile.close()
 
       imageLoaded = pdb.file_webp_load(generatedFile, generatedFile)
@@ -139,7 +146,7 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
          "prompt": prompt,
          "nsfw": nsfw,
          "censor_nsfw": False,
-         "r2": False
+         "r2": True
       }
 
       if image.width % 64 != 0:
