@@ -1,5 +1,8 @@
 # History
 ## GIMP Plugin
+### Discontinued
+The GIMP plugin notebook was based on the deforum notebook. As this notebook is broking now, the GIMP plugin notebook doesn't work any longer either. To make it working again, a complete rewrite would be necessary. This would happen in the future again again. For this reason and combined with the fact that the usage of the GIMP notebook seems to be pretty low, the GIMP plugin for colab will be discontinued. Please check out the [GIMP plugin, which uses stablehorde](https://github.com/blueturtleai/gimp-stable-diffusion/tree/main/stablehorde) as an alternative.
+
 ### 1.2.0
 #### Changes
 - Now text2img is supported.
@@ -37,6 +40,9 @@
 Initial version
 
 ## Stable-Diffusion server
+### Discontinued
+The GIMP plugin notebook was based on the deforum notebook. As this notebook is broking now, the GIMP plugin notebook doesn't work any longer either. To make it working again, a complete rewrite would be necessary. This would happen in the future again again. For this reason and combined with the fact that the usage of the GIMP notebook seems to be pretty low, the GIMP plugin for colab will be discontinued. Please check out the [GIMP plugin, which uses stablehorde](https://github.com/blueturtleai/gimp-stable-diffusion/tree/main/stablehorde) as an alternative.
+
 ### 1.3.0
 Changes
 - Now text2img is supported.
