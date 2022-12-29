@@ -2,6 +2,9 @@
 
 This repository includes a GIMP plugin for communication with a stable-diffusion server and a Google colab notebook for running the server.
 
+### Discontinued
+The GIMP plugin notebook was based on the deforum notebook. As this notebook is broking now, the GIMP plugin notebook doesn't work any longer either. To make it working again, a complete rewrite would be necessary. This would happen in the future again again. For this reason and combined with the fact that the usage of the GIMP notebook seems to be pretty low, the GIMP plugin for colab will be discontinued. Please check out the [GIMP plugin, which uses stablehorde](https://github.com/blueturtleai/gimp-stable-diffusion/tree/main/stablehorde) as an alternative.
+
 **More flavours of the plugin are available:**
 - Free image generation without running a Colab notebook or a local server: [GIMP plugin](https://github.com/blueturtleai/gimp-stable-diffusion/tree/main/stablehorde)
 - Image generation with a local server: [GIMP plugin](https://github.com/blueturtleai/gimp-stable-diffusion/tree/main/local)
