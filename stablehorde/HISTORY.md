@@ -1,5 +1,9 @@
 # History
 ## GIMP Plugin
+### 1.3.5
+Bugfixes
+- In some cases generation failed due to invalid prompt strength values
+
 ### 1.3.4
 Changes
 - The generated images are now transferred via Cloudflare r2.
