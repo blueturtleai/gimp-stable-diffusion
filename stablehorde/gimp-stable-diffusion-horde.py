@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# v1.3.4
+# v1.3.5
 
 import urllib2
 import tempfile
@@ -15,7 +15,7 @@ import re
 
 from gimpfu import *
 
-VERSION = 134
+VERSION = 135
 INIT_FILE = "init.png"
 GENERATED_FILE = "generated.png"
 API_ROOT = "https://stablehorde.net/api/v2/"
@@ -234,7 +234,7 @@ register(
          ("Inpainting", "MODE_INPAINTING")
       )),
       (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0, 1, 0.1)),
-      (PF_SLIDER, "promptStrength", "Prompt Strength", 7.5, (0, 20, 0.5)),
+      (PF_SLIDER, "promptStrength", "Prompt Strength", 8, (0, 20, 1)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
       (PF_STRING, "seed", "Seed (optional)", ""),
       (PF_TOGGLE, "nsfw", "NSFW", False),
