@@ -119,7 +119,7 @@ def checkStatus():
    elif data["done"] == True:
       return
 
-def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
+def generate(image, drawable, mode, selModel, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
    if image.width < 384 or image.width > 1024 or image.height < 384 or image.height > 1024:
       raise Exception("Invalid image size. Image needs to be between 384x384 and 1024x1024.")
 
@@ -131,9 +131,10 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
 
    pdb.gimp_progress_init("", None)
 
-   global checkMax
+   global checkMax, modelList
    checkMax = (maxWaitMin * 60)/CHECK_WAIT
-
+   selectedModel = [ modelList[selModel] ]
+  
    try:
       params = {
          "cfg_scale": float(promptStrength),
@@ -143,12 +144,13 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
 
       data = {
          "params": params,
+         "models": selectedModel,
          "prompt": prompt,
          "nsfw": nsfw,
          "censor_nsfw": False,
          "r2": True
       }
-
+      
       if image.width % 64 != 0:
          width = math.floor(image.width/64) * 64
       else:
@@ -169,10 +171,10 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
          params.update({"denoising_strength": (1 - float(initStrength))})
       elif mode == "MODE_INPAINTING":
          init = getImageData(image, drawable)
-         models = ["stable_diffusion_inpainting"]
+         #models = ["stable_diffusion_inpainting"]
          data.update({"source_image": init})
          data.update({"source_processing": "inpainting"})
-         data.update({"models": models})
+         #data.update({"models": models})
 
       data = json.dumps(data)
 
@@ -218,6 +220,22 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
 
    return
 
+def getAvailModels():
+
+   url = API_ROOT + "status/models?type=image"
+   response = urllib2.urlopen(url)
+   data = response.read()
+   data = json.loads(data)
+
+   modelList = []
+   for model in data:
+       modelList.append(model["name"])
+   modelList = sorted(modelList)
+   
+   return modelList
+
+modelList = getAvailModels()
+
 register(
    "stable-horde",
    "stable-horde",
@@ -233,14 +251,15 @@ register(
          ("Image -> Image", "MODE_IMG2IMG"),
          ("Inpainting", "MODE_INPAINTING")
       )),
+      (PF_OPTION, "selModel", "Model", 0, modelList),
       (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0, 1, 0.1)),
       (PF_SLIDER, "promptStrength", "Prompt Strength", 8, (0, 20, 1)),
       (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
       (PF_STRING, "seed", "Seed (optional)", ""),
-      (PF_TOGGLE, "nsfw", "NSFW", False),
+      (PF_TOGGLE, "nsfw", "NSFW", True),
       (PF_STRING, "prompt", "Prompt", ""),
       (PF_STRING, "apiKey", "API key (optional)", ""),
-      (PF_SLIDER, "maxWaitMin", "Max Wait (minutes)", 5, (1, 5, 1))
+      (PF_SLIDER, "maxWaitMin", "Max Wait (minutes)", 5, (1, 15, 1))
    ],
    [],
    generate
