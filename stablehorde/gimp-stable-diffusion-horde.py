@@ -119,21 +119,38 @@ def checkStatus():
    elif data["done"] == True:
       return
 
-def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, nsfw, prompt, apikey, maxWaitMin):
+def generate(image, drawable, mode, inpControl, selModel, prompt, neg_prompt, promptStrength, initStrength, sampler, steps, seed, nsfw, apikey, maxWaitMin, GFPGAN, CodeFormers, faceFixerStrength, strip_background, upscaler):
+
    if image.width < 384 or image.width > 1024 or image.height < 384 or image.height > 1024:
       raise Exception("Invalid image size. Image needs to be between 384x384 and 1024x1024.")
 
    if prompt == "":
       raise Exception("Please enter a prompt.")
+   elif neg_prompt != "":
+      prompt = prompt + (" ### ") + neg_prompt
 
    if mode == "MODE_INPAINTING" and drawable.has_alpha == 0:
-      raise Exception("Invalid image. For inpainting an alpha channel is needed.")
+      raise Exception("Invalid image. For INPAINTING an alpha channel is needed.")
 
    pdb.gimp_progress_init("", None)
 
    global checkMax
    checkMax = (maxWaitMin * 60)/CHECK_WAIT
 
+   optionList = []
+   if GFPGAN:
+       optionList.append("GFPGAN")
+   if CodeFormers:
+       optionList.append("CodeFormers")
+   if strip_background:
+       optionList.append("strip_background")
+   if upscaler > 0:
+       optionList.append(scalerList[upscaler])
+       
+   selectedModel = [ modelList[selModel] ]
+   sampler_name = sampList[sampler]
+   repl_filter = not nsfw
+   
    try:
       params = {
          "cfg_scale": float(promptStrength),
@@ -143,12 +160,14 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
 
       data = {
          "params": params,
+         "models": selectedModel,
          "prompt": prompt,
          "nsfw": nsfw,
+         "replacement_filter": repl_filter,
          "censor_nsfw": False,
          "r2": True
       }
-
+      
       if image.width % 64 != 0:
          width = math.floor(image.width/64) * 64
       else:
@@ -161,19 +180,35 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
 
       params.update({"width": int(width)})
       params.update({"height": int(height)})
+      
+      denoiseStrength = round(1 - float(initStrength), 2)
+      
+      if len(optionList) > 0:
+         params.update({"post_processing": optionList})
+         params.update({"facefixer_strength": float(faceFixerStrength)})
+      if upscaler > 0:
+         params.update({"hires_fix": True})
 
       if mode == "MODE_IMG2IMG":
          init = getImageData(image, drawable)
          data.update({"source_image": init})
          data.update({"source_processing": "img2img"})
-         params.update({"denoising_strength": (1 - float(initStrength))})
+         params.update({"denoising_strength": denoiseStrength})
+         if inpControl > 0:
+            inpaintControl = inpControlList[inpControl]
+            params.update({"control_type" : inpaintControl})
+         params.update({"sampler_name": sampler_name})
       elif mode == "MODE_INPAINTING":
          init = getImageData(image, drawable)
-         models = ["stable_diffusion_inpainting"]
          data.update({"source_image": init})
          data.update({"source_processing": "inpainting"})
-         data.update({"models": models})
-
+         params.update({"denoising_strength": denoiseStrength})
+         if inpControl > 0:
+            inpaintControl = inpControlList[inpControl]
+            params.update({"control_type" : inpaintControl})
+      else:
+         params.update({"sampler_name": sampler_name})
+      
       data = json.dumps(data)
 
       apikey = "0000000000" if not apikey else apikey
@@ -218,32 +253,64 @@ def generate(image, drawable, mode, initStrength, promptStrength, steps, seed, n
 
    return
 
+def getAvailModels():
+
+   url = API_ROOT + "status/models?type=image"
+   response = urllib2.urlopen(url)
+   data = response.read()
+   data = json.loads(data)
+
+   modelList = []
+   modelVerboseList = []
+   SD_pos = 0
+   for model in data:
+       modelList.append(model["name"])
+       modelVerboseList.append(model["name"] + " (" + str(model["count"]) + ") - queue: " + str(model["jobs"]))
+       if model["name"] == "stable_diffusion":
+           SD_pos = len(modelList) -1
+   
+   return modelList, modelVerboseList, SD_pos
+
+inpControlList = ["none", "canny", "hed", "depth", "normal", "openpose", "seg", "scribble", "fakescribbles", "hough" ]
+sampList = ["k_dpm_2_a", "k_euler_a", "lcm", "k_euler", "k_dpmpp_2s_a", "k_dpm_fast", "k_dpm_adaptive", "k_dpmpp_sde", "k_lms", "k_heun", "k_dpmpp_2m", "dpmsolver", "DDIM", "k_dpm_2" ]
+scalerList = ["none", "RealESRGAN_x2plus", "RealESRGAN_x4plus_anime_6B", "NMKD_Siax", "4x_AnimeSharp"]
+modelList, modelVerboseList, SD_position = getAvailModels()
+
 register(
-   "stable-horde",
-   "stable-horde",
-   "stable-horde",
-   "BlueTurtleAI",
-   "BlueTurtleAI",
-   "2022",
-   "<Image>/AI/Stablehorde",
-   "*",
+   "stable-horde", #function name
+   "stable-horde", #menu label
+   "stable-horde", #description
+   "BlueTurtleAI", #author
+   "BlueTurtleAI", #copyright notice
+   "2022", #date created
+   "<Image>/AI/Stablehorde", #menupath
+   "*", #image type that the script works on
    [
       (PF_RADIO, "mode", "Generation Mode", "MODE_TEXT2IMG", (
          ("Text -> Image", "MODE_TEXT2IMG"),
          ("Image -> Image", "MODE_IMG2IMG"),
          ("Inpainting", "MODE_INPAINTING")
       )),
-      (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0, 1, 0.1)),
-      (PF_SLIDER, "promptStrength", "Prompt Strength", 8, (0, 20, 1)),
-      (PF_SLIDER, "steps", "Steps", 50, (10, 150, 1)),
-      (PF_STRING, "seed", "Seed (optional)", ""),
-      (PF_TOGGLE, "nsfw", "NSFW", False),
+      (PF_OPTION, "inpControl", "Img2Img/Inpainting control", 0, inpControlList),
+      (PF_OPTION, "selModel", "Model", SD_position, modelVerboseList),
       (PF_STRING, "prompt", "Prompt", ""),
+      (PF_STRING, "neg_prompt", "Negative Prompt", ""),
+      (PF_SLIDER, "promptStrength", "Prompt Strength", 8, (0, 30, 1)),
+      (PF_SLIDER, "initStrength", "Init Strength", 0.3, (0, 0.99, 0.01)),
+      (PF_OPTION, "sampler", "Sampler", 3, sampList),
+      (PF_SLIDER, "steps", "Steps", 50, (1, 150, 1)),
+      (PF_STRING, "seed", "Seed (optional)", ""),
+      (PF_TOGGLE, "nsfw", "NSFW", True),
       (PF_STRING, "apiKey", "API key (optional)", ""),
-      (PF_SLIDER, "maxWaitMin", "Max Wait (minutes)", 5, (1, 5, 1))
+      (PF_SLIDER, "maxWaitMin", "Max Wait (minutes)", 5, (1, 15, 1)),
+      (PF_TOGGLE, "GFPGAN", "Post-process GFPGAN", False),
+      (PF_TOGGLE, "CodeFormers", "Post-process CodeFormers", False),
+      (PF_SLIDER, "faceFixerStrength", "Face Fixer Strength", 0.7, (0, 1, 0.01)),
+      (PF_TOGGLE, "strip_background", "Post-process strip_background", False),
+      (PF_OPTION, "upscaler", "Upscaler", 0, scalerList)
    ],
-   [],
-   generate
+   [], #results
+   generate #function
 )
 
 main()
